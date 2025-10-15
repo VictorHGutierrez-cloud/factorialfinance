@@ -1,0 +1,2721 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial HR | Turnover Cost Calculator</title>
+    
+    <!-- Enhancedd CSS Framework -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <!-- Factorial Font: Fira Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts.css">
+    
+    <!-- 🚀 ULTIMATE ENHANCED VISUAL SYSTEM -->
+    <link rel="stylesheet" href="enhanced-styles.css">
+    
+    <!-- 🔥 CRITICAL FALLBACK CSS FOR IMMEDIATE LOADING -->
+    <style>
+        /* 🎯 RADICAL RED BOXES - CRITICAL INLINE CSS */
+        .radical-red-box-title {
+            background: #FF355E !important;
+            border: none !important;
+            border-radius: 20px !important;
+            padding: 25px 35px !important;
+            margin: 15px 0 !important;
+            box-shadow: 
+                0 0 25px rgba(255, 53, 94, 0.4),
+                0 0 50px rgba(255, 53, 94, 0.15) !important;
+            position: relative !important;
+            overflow: hidden !important;
+            z-index: 10 !important;
+        }
+        
+        .radical-red-box-subtitle {
+            background: rgba(255, 53, 94, 0.06) !important;
+            border: 2px solid rgba(255, 53, 94, 0.8) !important;
+            border-radius: 20px !important;
+            padding: 20px 25px !important;
+            margin: 12px 0 !important;
+            box-shadow: 
+                0 0 20px rgba(255, 53, 94, 0.25),
+                0 0 40px rgba(255, 53, 94, 0.1) !important;
+            position: relative !important;
+            overflow: hidden !important;
+            z-index: 10 !important;
+        }
+        
+        /* Menu Lateral de Navegação */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, #25253D, #FF355E);
+            z-index: 9999;
+            transition: left 0.3s ease-in-out;
+            overflow-y: auto;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sidebar.open {
+            left: 0;
+        }
+        
+        .sidebar-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .sidebar-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .sidebar-nav {
+            padding: 2rem 0;
+        }
+        
+        .sidebar-nav-item {
+            display: block;
+            padding: 1rem 2rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: #FFB940;
+            transform: translateX(10px);
+        }
+        
+        .sidebar-nav-item.active {
+            background: rgba(255, 255, 255, 0.15);
+            border-left-color: #FFB940;
+        }
+        
+        .sidebar-footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .sidebar-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10000;
+            background: #FF355E;
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 53, 94, 0.4);
+            /* Garantir que o botão seja clicável */
+            pointer-events: auto;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        .sidebar-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 53, 94, 0.6);
+        }
+        
+        /* Garantir que o botão sidebar seja sempre clicável */
+        .sidebar-toggle:active {
+            transform: scale(0.95);
+        }
+        
+        /* Forçar visibilidade e interatividade */
+        .sidebar-toggle {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Ensure holographic cards always work */
+        .holographic-card-ultimate {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            border: 1px solid transparent;
+            border-radius: 50px;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6), 0 0 40px rgba(102, 126, 234, 0.4), 0 0 60px rgba(102, 126, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: pulse-holographic 4s ease infinite;
+        }
+        
+        .holographic-card-ultimate::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b, #fb5607);
+            background-size: 400% 400%;
+            border-radius: inherit;
+            animation: aurora-dance 6s linear infinite;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask-composite: xor;
+        }
+        
+        .holographic-card-ultimate:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5), 0 0 40px rgba(131, 56, 236, 0.5), 0 0 60px rgba(58, 134, 255, 0.5);
+            animation: liquid-morph 4s ease infinite;
+        }
+        
+        @keyframes pulse-holographic {
+            0%, 100% { 
+                background-position: 0% 50%;
+                box-shadow: 0 0 30px rgba(255, 0, 110, 0.6);
+            }
+            50% { 
+                background-position: 100% 50%;
+                box-shadow: 0 0 50px rgba(131, 56, 236, 0.8), 0 0 80px rgba(58, 134, 255, 0.6);
+            }
+        }
+        
+        @keyframes aurora-dance {
+            0% { 
+                background-position: 0% 50%;
+                filter: hue-rotate(0deg) brightness(1) saturate(1);
+            }
+            25% { 
+                background-position: 100% 50%;
+                filter: hue-rotate(90deg) brightness(1.2) saturate(1.3);
+            }
+            50% { 
+                background-position: 0% 100%;
+                filter: hue-rotate(180deg) brightness(1) saturate(1);
+            }
+            75% { 
+                background-position: 100% 0%;
+                filter: hue-rotate(270deg) brightness(1.2) saturate(1.3);
+            }
+            100% { 
+                background-position: 0% 50%;
+                filter: hue-rotate(360deg) brightness(1) saturate(1);
+            }
+        }
+        
+        @keyframes liquid-morph {
+            0%, 100% { 
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                background-position: 0% 50%;
+            }
+            25% { 
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+                background-position: 25% 75%;
+            }
+            50% { 
+                border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
+                background-position: 100% 50%;
+            }
+            75% { 
+                border-radius: 60% 40% 60% 40% / 70% 30% 50% 60%;
+                background-position: 75% 25%;
+            }
+        }
+        
+        /* 🔥 FORCE VISIBILITY AND PREVENT FLICKERING */
+        .holographic-card-ultimate,
+        .card-hover {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+            min-height: 200px;
+        }
+        
+        /* Ensure smooth loading */
+        .holographic-card-ultimate.loaded {
+            animation-play-state: running;
+        }
+        
+        /* Fallback for browsers that don't support advanced CSS */
+        @supports not (backdrop-filter: blur(10px)) {
+            .holographic-card-ultimate {
+                background: rgba(255, 255, 255, 0.15);
+                border: 2px solid #3b82f6;
+            }
+        }
+
+        /* Calculator: remove bubble/glow completely */
+        .no-bubble.holographic-card-ultimate {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: none !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+            animation: none !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+        .no-bubble.holographic-card-ultimate::before {
+            content: none !important;
+        }
+        
+        /* Disable all distracting animations for calculator section */
+        #roi .floating,
+        #roi .holographic-card-ultimate,
+        #roi .card-hover {
+            animation: none !important;
+            transform: none !important;
+        }
+        
+        /* Clean input styling */
+        .calculator-input-clean {
+            background: white !important;
+            border: 2px solid #e5e7eb !important;
+            border-radius: 0.75rem !important;
+            transition: border-color 0.2s ease !important;
+        }
+        
+        .calculator-input-clean:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+            outline: none !important;
+        }
+    </style>
+    
+    <!-- Enhanced Custom Styles -->
+    <style>
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #25253D, #FF355E, #FF9153);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #f59e0b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .loading-subtext {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        :root {
+            /* Factorial RH Brand */
+            --brand-radical: #FF355E; /* Radical Red */
+            --brand-viridian: #07A2AD; /* Viridian Green */
+            --brand-sunbeam: #FFB940; /* Sunbeam */
+            --brand-tangerine: #FF9153; /* Tangerine */
+            --brand-midnight: #25253D; /* Midnight */
+
+            --primary: var(--brand-midnight);
+            --secondary: var(--brand-sunbeam);
+            --accent: var(--brand-viridian);
+            --dark: var(--brand-midnight);
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, var(--brand-radical) 0%, var(--brand-tangerine) 50%, var(--brand-sunbeam) 100%);
+            --neon-blue: var(--brand-viridian);
+            --neon-orange: var(--brand-tangerine);
+            --neon-green: var(--brand-viridian);
+            --cyber-purple: var(--brand-radical);
+            --gold: var(--brand-sunbeam);
+            --platinum: #e5e4e2;
+            
+            /* Dark mode variables */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-accent: var(--brand-radical);
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-accent: #60a5fa;
+            --border-color: #475569;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Fira Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--brand-radical) 0%, var(--brand-tangerine) 50%, var(--brand-sunbeam) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(7, 162, 173, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 145, 83, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 185, 64, 0.2) 0%, transparent 50%);
+            animation: pulse-glow 8s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .floating-3d {
+            animation: float-3d 8s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(180deg); }
+        }
+        
+        @keyframes float-3d {
+            0%, 100% { 
+                transform: translateY(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); 
+            }
+            25% { 
+                transform: translateY(-15px) rotateX(90deg) rotateY(90deg) rotateZ(0deg); 
+            }
+            50% { 
+                transform: translateY(-30px) rotateX(180deg) rotateY(180deg) rotateZ(90deg); 
+            }
+            75% { 
+                transform: translateY(-15px) rotateX(270deg) rotateY(270deg) rotateZ(180deg); 
+            }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--brand-sunbeam), var(--brand-tangerine));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 185, 64, 0.5);
+        }
+        
+        .neon-text {
+            color: var(--text-accent);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cyber-text {
+            font-family: 'Fira Sans', sans-serif;
+            color: var(--text-accent);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+        
+        /* Removed excessive neon animations for professional look */
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .card-hover:hover::before {
+            left: 100%;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02) rotateY(5deg);
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.25),
+                0 0 30px rgba(0, 212, 255, 0.3),
+                0 0 60px rgba(139, 92, 246, 0.2);
+        }
+        
+        .holographic-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .holographic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brand-radical), var(--brand-viridian));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .holographic-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .holographic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--brand-viridian), var(--brand-tangerine));
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--brand-viridian);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            text-shadow: 0 0 10px var(--neon-blue);
+            transform: translateY(-2px);
+        }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .cyber-button {
+            background: linear-gradient(135deg, var(--brand-radical), var(--brand-tangerine));
+            border: none;
+            color: white;
+            font-family: 'Fira Sans', sans-serif;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cyber-button:hover::before {
+            left: 100%;
+        }
+        
+        .cyber-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--shadow-color);
+        }
+        
+        .stat-counter {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            font-family: 'Fira Sans', sans-serif;
+            background: linear-gradient(135deg, var(--brand-sunbeam), var(--brand-tangerine));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Estilos para abas da calculadora */
+        .tab-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--brand-radical), var(--brand-tangerine));
+            color: white;
+            border: 1px solid transparent;
+        }
+
+        .tab-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            transition: all 0.3s ease;
+        }
+
+        .tab-content.hidden {
+            display: none;
+        }
+        
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .solution-tab {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .solution-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .solution-tab:hover::before {
+            left: 100%;
+        }
+        
+        .solution-tab.active {
+            background: linear-gradient(135deg, var(--brand-radical), var(--brand-tangerine));
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 53, 94, 0.4);
+        }
+        
+        .solution-tab:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 500px;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 400px;
+                max-width: 95%;
+                padding: 1rem;
+            }
+            
+            .chart-container .absolute.top-0 {
+                padding: 1rem;
+            }
+            
+            .chart-container .absolute.bottom-0 {
+                padding: 1rem;
+            }
+            
+            .chart-container .absolute.bottom-0 .flex {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .hero-gradient h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .cyber-button {
+                font-size: 1rem !important;
+                padding: 0.75rem 1.5rem !important;
+            }
+            
+            .floating-3d {
+                font-size: 2rem !important;
+            }
+            
+            .holographic-card {
+                padding: 1.5rem !important;
+            }
+        }
+        
+        /* Touch device enhancements */
+        @media (hover: none) and (pointer: coarse) {
+            .card-hover:hover {
+                transform: none;
+            }
+            
+            .cyber-button:hover {
+                transform: none;
+            }
+        }
+        
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .neon-text {
+                text-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+            }
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float-slow 20s infinite linear;
+        }
+        
+        @keyframes float-slow {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        
+        .gradient-border {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+        }
+        
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #f59e0b, #f97316, #10b981);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gradient-border:hover::before {
+            opacity: 1;
+        }
+        
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid var(--secondary);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        /* Respect user reduced motion preference and provide a global override */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Support toggle via class for in-page reduced motion control */
+        .reduced-motion * {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+            scroll-behavior: auto !important;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--secondary); }
+        }
+
+        /* Unified hero title style (brand color, low neon) */
+        .hero-title-part {
+            color: var(--light);
+            text-shadow: none;
+        }
+    </style>
+
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">🚀 INICIALIZANDO</div>
+            <div class="loading-subtext">Preparando sua calculadora de Turnover...</div>
+        </div>
+    </div>
+    
+    <!-- Menu Lateral de Navegação -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+    
+    <!-- Overlay do Menu -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button class="sidebar-close" id="sidebarClose">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        
+        <div class="sidebar-header">
+            <img src="Logo/Color/Factorial_logo_radical.png" alt="Factorial RH" class="sidebar-logo">
+            <div class="sidebar-title">Factorial RH</div>
+            <div class="sidebar-subtitle">ROI Calculator</div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#sobre" class="sidebar-nav-item" data-section="sobre">
+                🚀 About
+            </a>
+            <a href="#market" class="sidebar-nav-item" data-section="market">
+                📊 RH Indicators
+            </a>
+            <a href="#fintech" class="sidebar-nav-item" data-section="fintech">
+                📈 ROI Charts
+            </a>
+            <a href="#solution" class="sidebar-nav-item" data-section="solution">
+                🔧 Factorial Resources
+            </a>
+            <a href="#roi" class="sidebar-nav-item" data-section="roi">
+                🧮 ROI Calculator
+            </a>
+            <a href="#alliance" class="sidebar-nav-item" data-section="alliance">
+                🌟 Why Factorial?
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="text-white text-sm opacity-80">
+                💡 Use the menu to quickly navigate sections
+            </div>
+        </div>
+    </div>
+    
+    <!-- Particle System Background (Disabled for better performance) -->
+    <!-- <div id="particles-js"></div> -->
+    
+    <!-- Enhanced Floating Background Elements removed to avoid covering calculator -->
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3 text-white">
+                    <img src="Logo/Color/Factorial_logo_radical.png" alt="Factorial RH" class="h-8 w-auto hidden sm:block" />
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#sobre" class="nav-link text-white font-medium">About</a>
+                    <a href="#roi" class="nav-link text-white font-medium">ROI Calculator</a>
+                    <a href="#solution" class="nav-link text-white font-medium">Resources</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-[#FF355E] hover:bg-[#E62E4D] dark:bg-white/10 dark:hover:bg-white/20 transition-colors border border-[#E62E4D] dark:border-white/20 shadow-lg">
+                        <svg id="sun-icon" class="w-5 h-5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="moon-icon" class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<!-- Hero Section -->
+<section class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden" id="sobre">
+    <div class="text-center text-white z-10 px-6">
+        <div class="radical-red-box-title">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <span class="hero-title-part">Calculate</span>
+                <br>
+                <span class="hero-title-part">the savings from Turnover</span>
+                <br>
+                <span class="hero-title-part">using Factorial</span>
+            </h1>
+        </div>
+        <div class="radical-red-box-title">
+            <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto text-white leading-relaxed">
+                Optimize recruitment, onboarding and retain talent! Discover the financial impact of reducing turnover and speeding up hires with Factorial HR.
+            </p>
+        </div>
+        <div class="mb-8">
+            <div class="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-full font-bold text-lg">
+                🚀 Real, measurable results for your HR 🦄
+            </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+            <a href="#roi" class="btn-holographic cyber-button text-white font-bold py-4 px-8 rounded-lg text-lg transform hover:scale-105 shadow-lg relative overflow-hidden">
+                <span class="relative z-10">Go to Calculator</span>
+            </a>
+            <a href="#solution" class="btn-energy cyber-button bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-4 px-8 rounded-lg text-lg transform hover:scale-105 relative overflow-hidden">
+                <span class="relative z-10">View Resources</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Elegant Floating Background Elements -->
+    <div class="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+        <div class="absolute floating" style="top:8%; left:12%; animation-delay:0s;">
+            <div class="w-24 h-24 bg-gradient-to-br from-blue-400/20 to-purple-500/20 backdrop-blur-sm rounded-3xl transform rotate-12 border border-white/20"></div>
+        </div>
+        <div class="absolute floating" style="top:18%; left:75%; animation-delay:1.2s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-pink-400/15 to-red-500/15 backdrop-blur-sm rounded-full border border-white/15"></div>
+        </div>
+        <div class="absolute floating" style="top:42%; left:18%; animation-delay:2.4s;">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-400/20 to-blue-500/20 backdrop-blur-sm transform rotate-45 border border-white/20"></div>
+        </div>
+        <div class="absolute floating" style="top:65%; left:82%; animation-delay:3.6s;">
+            <div class="w-28 h-28 bg-gradient-to-br from-yellow-400/15 to-orange-500/15 backdrop-blur-sm rounded-2xl transform -rotate-12 border border-white/15"></div>
+        </div>
+        <div class="absolute floating" style="top:72%; left:28%; animation-delay:4.8s;">
+            <div class="w-18 h-18 bg-gradient-to-br from-indigo-400/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-white/20"></div>
+        </div>
+        <div class="absolute floating" style="top:22%; left:52%; animation-delay:6s;">
+            <div class="w-32 h-32 bg-gradient-to-br from-teal-400/15 to-cyan-500/15 backdrop-blur-sm rounded-3xl transform rotate-6 border border-white/15"></div>
+        </div>
+        <div class="absolute floating" style="top:55%; left:8%; animation-delay:7.2s;">
+            <div class="w-14 h-14 bg-gradient-to-br from-rose-400/20 to-pink-500/20 backdrop-blur-sm transform rotate-30 border border-white/20"></div>
+        </div>
+        <div class="absolute floating" style="top:85%; left:68%; animation-delay:8.4s;">
+            <div class="w-26 h-26 bg-gradient-to-br from-violet-400/15 to-purple-500/15 backdrop-blur-sm rounded-2xl transform -rotate-18 border border-white/15"></div>
+        </div>
+        <div class="absolute floating" style="top:3%; left:45%; animation-delay:9.6s;">
+            <div class="w-22 h-22 bg-gradient-to-br from-emerald-400/20 to-green-500/20 backdrop-blur-sm rounded-full border border-white/20"></div>
+        </div>
+        <div class="absolute floating" style="top:38%; left:78%; animation-delay:10.8s;">
+            <div class="w-12 h-12 bg-gradient-to-br from-amber-400/15 to-yellow-500/15 backdrop-blur-sm transform rotate-45 border border-white/15"></div>
+        </div>
+        <div class="absolute floating" style="top:58%; left:38%; animation-delay:12s;">
+            <div class="w-20 h-20 bg-gradient-to-br from-sky-400/20 to-blue-500/20 backdrop-blur-sm rounded-3xl transform -rotate-12 border border-white/20"></div>
+        </div>
+        <div class="absolute floating" style="top:88%; left:15%; animation-delay:13.2s;">
+            <div class="w-16 h-16 bg-gradient-to-br from-fuchsia-400/15 to-purple-500/15 backdrop-blur-sm rounded-full border border-white/15"></div>
+        </div>
+        
+        <!-- Subtle Lines -->
+        <div class="absolute floating" style="top:15%; left:25%; animation-delay:14.4s;">
+            <div class="w-32 h-0.5 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        </div>
+        
+        <div class="absolute floating" style="top:75%; left:65%; animation-delay:15.6s;">
+            <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-white/8 to-transparent"></div>
+        </div>
+        
+        <!-- Floating Dots -->
+        <div class="absolute floating" style="top:30%; left:85%; animation-delay:16.8s;">
+            <div class="w-2 h-2 bg-white/30 rounded-full"></div>
+        </div>
+        
+        <div class="absolute floating" style="top:80%; left:12%; animation-delay:18s;">
+            <div class="w-1.5 h-1.5 bg-white/25 rounded-full"></div>
+        </div>
+        
+        <div class="absolute floating" style="top:45%; left:92%; animation-delay:19.2s;">
+            <div class="w-1 h-1 bg-white/20 rounded-full"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Insights Section (ROI & Pessoas) -->
+<section id="market" class="py-20 relative z-10" style="background: var(--bg-secondary);">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Título -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6" style="color: var(--text-primary);">
+        <span class="cyber-text">Impact on People:</span> 
+        <br>
+        <span class="neon-text">Turnover, Hiring Time and Productivity</span>
+        <br>
+        <span class="gradient-text">Where Factorial generates ROI</span>
+      </h2>
+      <p class="text-xl max-w-4xl mx-auto leading-relaxed" style="color: var(--text-secondary);">
+        Use data to prioritize actions with the highest financial impact: reduce turnover, speed up hiring and standardize onboarding.
+      </p>
+      <div class="mt-6 inline-block bg-gradient-to-r from-[var(--brand-radical)] to-[var(--brand-tangerine)] text-white px-6 py-3 rounded-full font-bold text-lg shadow-lg">
+        📊 RH Key Indicators
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid md:grid-cols-3 gap-8">
+             <div class="holographic-card-ultimate card-hover p-8 rounded-2xl text-center relative overflow-hidden">
+         <div class="stat-counter text-6xl font-extrabold mb-4" data-target="25" style="color: var(--text-accent);">0</div>
+         <h3 class="text-2xl font-bold mb-2 neon-text font-fira" style="color: var(--text-primary);"> Actual Turnover (%)</h3>
+         <p class="font-medium font-fira" style="color: var(--text-secondary);">Average estimate for simulation. Adjust the calculator for your reality.</p>
+         <div class="absolute bottom-0 right-0 text-6xl opacity-20">🔁</div>
+       </div>
+
+             <div class="holographic-card-ultimate card-hover p-8 rounded-2xl text-center relative overflow-hidden">
+         <div class="stat-counter text-6xl font-extrabold mb-4" data-target="30" style="color: var(--text-accent);">0</div>
+         <h3 class="text-2xl font-bold mb-2 neon-text font-fira" style="color: var(--text-primary);">Time-to-hire (days)</h3>
+         <p class="font-medium font-fira" style="color: var(--text-secondary);">Average time to fill a position. Reduce with automations and SLAs.</p>
+         <div class="absolute bottom-0 right-0 text-6xl opacity-20">⏱️</div>
+       </div>
+
+       <div class="holographic-card-ultimate card-hover p-8 rounded-2xl text-center relative overflow-hidden">
+         <div class="stat-counter text-6xl font-extrabold mb-4" data-target="3" style="color: var(--text-accent);">0</div>
+         <h3 class="text-2xl font-bold mb-2 neon-text font-fira" style="color: var(--text-primary);">Ramp-up (months)</h3>
+         <p class="font-medium font-fira" style="color: var(--text-secondary);">Average time to full productivity. Standardize onboarding to reduce.</p>
+         <div class="absolute bottom-0 right-0 text-6xl opacity-20">📈</div>
+       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Script para contadores -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll(".stat-counter");
+
+  const runCounter = (counter) => {
+    const target = +counter.getAttribute("data-target");
+    
+    // Use the enhanced counter animation
+    animateCounterWithImpact(counter, target, 2500);
+    
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Add entrance effect
+            gsap.fromTo(counter, 
+              { scale: 0, opacity: 0, rotation: -180 },
+              { 
+                scale: 1, 
+                opacity: 1, 
+                rotation: 0, 
+                duration: 1, 
+                ease: 'back.out(1.7)',
+                onComplete: () => animateCounterWithImpact(counter, target, 2500)
+              }
+            );
+            obs.unobserve(counter);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(counter);
+  };
+
+  counters.forEach(runCounter);
+});
+</script>
+
+
+
+
+
+    <!-- Solutions Section -->
+    <section id="solution" class="py-20" style="background: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    <span class="cyber-text">FACTORIAL RESOURCES</span> FOR 
+                    <br>
+                    <span class="neon-text">HR RESULTS</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    Centralize processes, standardize operations and develop your talent. From attraction to departure, everything in one place.
+                </p>
+                <div class="mt-6 inline-block bg-gradient-to-r from-[var(--brand-radical)] to-[var(--brand-tangerine)] text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl">
+                    📌 High impact use cases
+                </div>
+            </div>
+            
+            <!-- Solution Tabs -->
+            <div class="flex justify-center mb-12 gap-6 flex-wrap">
+                <button class="solution-tab active bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 border-2 border-blue-400" data-tab="compliance">
+                    🏛️ People & Compliance
+                </button>
+                <button class="solution-tab bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 border-2 border-green-400" data-tab="fx">
+                    🎯 Recruitment 
+                </button>
+                <button class="solution-tab bg-gradient-to-r from-purple-500 to-purple-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 border-2 border-purple-400" data-tab="onboarding">
+                    🚀 Onboarding & Integration
+                </button>
+                <button class="solution-tab bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 border-2 border-orange-400" data-tab="time-tracking">
+                    ⏰ Time Tracking
+                </button>
+                <button class="solution-tab bg-gradient-to-r from-pink-500 to-pink-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg transform hover:scale-105 transition-all duration-300 border-2 border-pink-400" data-tab="performance">
+                    📊 Performance Evaluation
+                </button>
+            </div>
+            
+            <!-- Tab Contents -->
+            <div id="compliance" class="tab-content">
+                <div class="gradient-border p-8">
+                    <h3 class="text-3xl font-bold text-center mb-8 text-gray-900">People & Compliance: Governance and Compliance</h3>
+                    <div class="overflow-x-auto">
+                        <div class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl p-8 shadow-2xl border border-blue-100 transform hover:scale-105 transition-all duration-300">
+                            <table class="w-full text-center">
+                                <thead>
+                                    <tr class="border-b-2 border-blue-200">
+                                        <th class="p-6 font-bold text-lg text-blue-900 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-t-lg shadow-md">🏛️ Desafio</th>
+                                        <th class="p-6 font-bold text-lg text-red-700 bg-gradient-to-r from-red-100 to-pink-100 rounded-t-lg shadow-md">⚠️ Operational Pain</th>
+                                        <th class="p-6 font-bold text-lg text-green-700 bg-gradient-to-r from-green-100 to-emerald-100 rounded-t-lg shadow-md">✅ Como a Factorial ajuda</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-blue-100 hover:bg-blue-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">📋 Document Management and Compliance (CLT/eSocial)</td>
+                                            <td class="p-6 text-red-700 bg-red-50/90">🚨 Risk of non-compliance, manual controls and rework.</td>
+                                            <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">🔒 Secure storage, signatures, policies and approval trails centralized.</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">📅 Policies, vacations and absences</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">📉 Decentralized processes and low visibility.</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">⚙️ Configurable rules, approval flows and management reports.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="fx" class="tab-content hidden">
+                <div class="gradient-border p-8">
+                    <h3 class="text-3xl font-bold text-center mb-8 text-gray-900">🎯 Recruitment (ATS)</h3>
+                    <div class="overflow-x-auto">
+                        <div class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl p-8 shadow-2xl border border-blue-100 transform hover:scale-105 transition-all duration-300">
+                            <table class="w-full text-center">
+                                <thead>
+                                    <tr class="border-b-2 border-blue-200">
+                                        <th class="p-6 font-bold text-lg text-blue-900 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-t-lg shadow-md">📊 Criteria</th>
+                                        <th class="p-6 font-bold text-lg text-red-700 bg-gradient-to-r from-red-100 to-pink-100 rounded-t-lg shadow-md">❌ Manual Process</th>
+                                        <th class="p-6 font-bold text-lg text-green-700 bg-gradient-to-r from-green-100 to-emerald-100 rounded-t-lg shadow-md">✅ Factorial ATS</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-blue-100 hover:bg-blue-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">⚡ Speed</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🐌 Slow, repetitive tasks</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">🚀 Automation of triage and communication</td>
+                                    </tr>
+                                    <tr class="border-b border-blue-100 hover:bg-blue-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">💰 Cost</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">💸 High cost per position</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">💎 Reduction of time-to-hire and rework</td>
+                                    </tr>
+                                    <tr class="border-b border-blue-100 hover:bg-blue-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">👁️ Transparency</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🙈 Low visibility of the pipeline</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">🔍 Full visibility, SLAs and reports</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">🧩 Complexity</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🔀 Excessive tools</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">🎯 Everything in one place</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="onboarding" class="tab-content hidden">
+                <div class="gradient-border p-8">
+                    <h3 class="text-3xl font-bold text-center mb-8 text-gray-900">🚀 Onboarding Standardized and Scalable</h3>
+                    <div class="overflow-x-auto">
+                        <div class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl p-8 shadow-2xl border border-blue-100 transform hover:scale-105 transition-all duration-300">
+                            <table class="w-full text-center">
+                                <thead>
+                                    <tr class="border-b-2 border-blue-200">
+                                        <th class="p-6 font-bold text-lg text-blue-900 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-t-lg shadow-md">🎯 Action</th>
+                                        <th class="p-6 font-bold text-lg text-red-700 bg-gradient-to-r from-red-100 to-pink-100 rounded-t-lg shadow-md">❌ Conventional</th>
+                                        <th class="p-6 font-bold text-lg text-green-700 bg-gradient-to-r from-green-100 to-emerald-100 rounded-t-lg shadow-md">✅ With Factorial</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-blue-100 hover:bg-blue-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">📋 Documents and tasks</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">📧 Spreadsheets and emails scattered</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">✅ Checklists and unlimited digital signatures</td>
+                                    </tr>
+                                    <tr class="border-b border-blue-100 hover:bg-blue-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">🔗 Integrations</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🔄 Duplicated data</td>
+                                            <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">⚡ 100% open and documented API</td>
+                                    </tr>
+                                    <tr class="hover:bg-blue-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">📊 Metrics</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🙈 No visibility</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">📈 Productivity and time dashboards</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nova Aba: Relógio de Ponto -->
+            <div id="time-tracking" class="tab-content hidden">
+                <div class="gradient-border p-8">
+                    <h3 class="text-3xl font-bold text-center mb-8 text-gray-900">⏰ Intelligent Time Tracking</h3>
+                    <div class="overflow-x-auto">
+                        <div class="bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 rounded-2xl p-8 shadow-2xl border border-orange-100 transform hover:scale-105 transition-all duration-300">
+                            <table class="w-full text-center">
+                                <thead>
+                                    <tr class="border-b-2 border-orange-200">
+                                        <th class="p-6 font-bold text-lg text-orange-900 bg-gradient-to-r from-orange-100 to-amber-100 rounded-t-lg shadow-md">🎯 Functionality</th>
+                                        <th class="p-6 font-bold text-lg text-red-700 bg-gradient-to-r from-red-100 to-pink-100 rounded-t-lg shadow-md">❌ Traditional System</th>
+                                        <th class="p-6 font-bold text-lg text-green-700 bg-gradient-to-r from-green-100 to-emerald-100 rounded-t-lg shadow-md">✅ Factorial Time Tracking</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-orange-100 hover:bg-orange-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">📱 Time Tracking</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🏢 Physical clocks and cards</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">📱 App mobile with geolocation</td>
+                                    </tr>
+                                    <tr class="border-b border-orange-100 hover:bg-orange-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">🌍 Remote Work</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🚫 No remote work control</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">🏠 Registration of any place with validation</td>
+                                    </tr>
+                                    <tr class="border-b border-orange-100 hover:bg-orange-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">📊 Reports</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">📋 Spreadsheets and calculations</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">📈 Automatic reports of hours and bank</td>
+                                    </tr>
+                                    <tr class="hover:bg-orange-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">🔗 Integration</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🔄 Separated systems and duplication</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">⚡ Automatic integration with people management</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nova Aba: Avaliação de Desempenho -->
+            <div id="performance" class="tab-content hidden">
+                <div class="gradient-border p-8">
+                    <h3 class="text-3xl font-bold text-center mb-8 text-gray-900">📊 Strategic Performance Evaluation</h3>
+                    <div class="overflow-x-auto">
+                        <div class="bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-50 rounded-2xl p-8 shadow-2xl border border-pink-100 transform hover:scale-105 transition-all duration-300">
+                            <table class="w-full text-center">
+                                <thead>
+                                    <tr class="border-b-2 border-pink-200">
+                                        <th class="p-6 font-bold text-lg text-pink-900 bg-gradient-to-r from-pink-100 to-rose-100 rounded-t-lg shadow-md">🎯 Process</th>
+                                        <th class="p-6 font-bold text-lg text-red-700 bg-gradient-to-r from-red-100 to-pink-100 rounded-t-lg shadow-md">❌ Traditional Method</th>
+                                        <th class="p-6 font-bold text-lg text-green-700 bg-gradient-to-r from-green-100 to-emerald-100 rounded-t-lg shadow-md">✅ Factorial Performance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-pink-100 hover:bg-pink-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">📅 Performance Evaluation Cycles</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">📝 Printed forms and manual</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">🔄 Configurable and automated cycles</td>
+                                    </tr>
+                                    <tr class="border-b border-pink-100 hover:bg-pink-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">👥 Feedback 360°</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🙈 Only direct manager evaluation</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">🌟 Complete feedback from pairs and subordinates</td>
+                                    </tr>
+                                    <tr class="border-b border-pink-100 hover:bg-pink-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">🎯 Metas and OKRs</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">📋 Metas not aligned with strategy</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">🎯 Metas aligned with OKRs of the company</td>
+                                    </tr>
+                                    <tr class="hover:bg-pink-50/50 transition-all duration-300 hover:transform hover:scale-105">
+                                        <td class="p-6 font-semibold text-gray-800 bg-white/80 rounded-l-lg">📈 Development</td>
+                                        <td class="p-6 text-red-700 bg-red-50/90">🚫 No development plan</td>
+                                        <td class="p-6 text-green-700 bg-green-50/90 rounded-r-lg">🚀 Custom development plans</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- ROI Calculator Section -->
+    <section id="roi" class="py-20 relative z-10" style="background: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6" style="color: var(--text-primary);">
+                    <span class="cyber-text">CALCULATOR</span> 
+                    <br>
+                    <span class="neon-text">ROI FOR HR</span>
+                    <br>
+                    <span class="gradient-text">Turnover, Recruitment and Selection</span>
+                </h2>
+                <p class="text-xl max-w-4xl mx-auto leading-relaxed" style="color: var(--text-secondary);">
+                    Enter your team size and separations from the last year. Adjust assumptions to estimate annual savings and ROI with Factorial HR.
+                </p>
+            </div>
+
+            <div class="max-w-7xl mx-auto">
+                <div class="holographic-card-ultimate no-bubble card-hover p-6 rounded-2xl relative overflow-hidden">
+                    
+                    <!-- Calculadora ROI Reformulada - Interface Clara e Funcional -->
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <!-- COLUNA 1: INPUTS -->
+                        <div class="space-y-8">
+                            <!-- Dados da Empresa -->
+                            <div class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 backdrop-blur-sm border-2 border-blue-200 dark:border-blue-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+                                <h3 class="text-xl font-bold mb-4 flex items-center text-blue-800 dark:text-blue-200">
+                                    📊 Your Company Data
+                                </h3>
+                                <div class="space-y-4">
+                                    <div class="bg-white/80 dark:bg-gray-800/80 p-4 rounded-xl border border-blue-100 dark:border-blue-700">
+                                        <label class="block text-sm font-medium mb-2 text-blue-700 dark:text-blue-300">
+                                                👥 Total number of employees
+                                        </label>
+                                        <input 
+                                            id="roi-employees" 
+                                            type="number" 
+                                            min="1" 
+                                            value="200" 
+                                            class="w-full p-4 rounded-xl border-2 border-blue-300 dark:border-blue-500 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" 
+                                            placeholder="Ex: 200"
+                                        />
+                                    </div>
+                                    <div class="bg-white/80 dark:bg-gray-800/80 p-4 rounded-xl border border-blue-100 dark:border-blue-700">
+                                        <label class="block text-sm font-medium mb-2 text-blue-700 dark:text-blue-300">
+                                            🔄 Separations in the last year
+                                        </label>
+                                        <input 
+                                            id="roi-separations" 
+                                            type="number" 
+                                            min="0" 
+                                            value="50" 
+                                            class="w-full p-4 rounded-xl border-2 border-blue-300 dark:border-blue-500 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" 
+                                            placeholder="Ex: 50"
+                                        />
+                                    </div>
+                                    <div class="bg-white/80 dark:bg-gray-800/80 p-4 rounded-xl border border-blue-100 dark:border-blue-700">
+                                        <label class="block text-sm font-medium mb-2 text-blue-700 dark:text-blue-300">
+                                            💰 Average monthly salary (R$)
+                                        </label>
+                                        <input 
+                                            id="roi-salary" 
+                                            type="number" 
+                                            min="0" 
+                                            value="2500" 
+                                            step="10" 
+                                            class="w-full p-4 rounded-xl border-2 border-blue-300 dark:border-blue-500 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" 
+                                            placeholder="Ex: 2500"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Melhorias com Factorial -->
+                            <div class="bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-900/20 dark:via-emerald-900/20 dark:to-teal-900/20 border-2 border-green-200 dark:border-green-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+                                <h3 class="text-xl font-bold mb-4 flex items-center text-green-800 dark:text-green-200">
+                                    🚀 Improvements with Factorial
+                                </h3>
+                                <div class="space-y-4">
+                                    <div class="bg-white/80 dark:bg-gray-800/80 p-4 rounded-xl border border-green-100 dark:border-green-700">
+                                        <label class="block text-sm font-medium mb-2 text-green-700 dark:text-green-300">
+                                            📉 Expected turnover reduction (%)
+                                        </label>
+                                        <input 
+                                            id="roi-turnover-reduction" 
+                                            type="number" 
+                                            min="0" 
+                                            max="100" 
+                                            value="20" 
+                                            class="w-full p-4 rounded-xl border-2 border-green-300 dark:border-green-500 focus:border-green-500 dark:focus:border-green-400 focus:ring-2 focus:ring-green-200 dark:focus:ring-green-800 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" 
+                                            placeholder="Ex: 20"
+                                        />
+                                        <p class="text-xs mt-1 text-green-600 dark:text-green-400">Factorial can reduce turnover through better recruitment, onboarding and people management</p>
+                                    </div>
+                                    <div class="bg-white/80 dark:bg-gray-800/80 p-4 rounded-xl border border-green-100 dark:border-green-700">
+                                        <label class="block text-sm font-medium mb-2 text-green-700 dark:text-green-300">
+                                            💎 Factorial cost per employee/month (R$)
+                                        </label>
+                                        <input 
+                                            id="roi-software-cost" 
+                                            type="number" 
+                                            min="0" 
+                                            value="" 
+                                            step="1" 
+                                            class="w-full p-4 rounded-xl border-2 border-green-300 dark:border-green-500 focus:border-green-500 dark:focus:border-green-400 focus:ring-2 focus:ring-green-200 dark:focus:ring-green-800 transition-all bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400" 
+                                            placeholder="Digite o preço por colaborador"
+                                        />
+                                        <p class="text-xs mt-1 text-green-600 dark:text-green-400">Estimated price based on Factorial plans</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- BOTÃO CALCULAR -->
+                            <div class="text-center">
+                                <button 
+                                    id="calculate-roi-btn" 
+                                    class="bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 hover:from-purple-700 hover:via-pink-700 hover:to-red-700 text-white font-bold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 w-full border-2 border-purple-400/30"
+                                >
+                                    🧮 Calculate My ROI
+                                </button>
+                                <p class="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                                    Click to see your potential savings
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- COLUNA 2: RESULTADOS -->
+                        <div class="space-y-6">
+                            <div id="results-container" class="space-y-4" style="display: none;">
+                                <h3 class="text-xl font-bold mb-4" style="color: var(--text-primary);">📈 Your Results</h3>
+                                
+                                <!-- Situação Atual -->
+                                <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+                                    <h4 class="font-semibold text-red-800 mb-3">📊 Current Situation</h4>
+                                    <div class="grid grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <span class="text-red-600">Turnover rate:</span>
+                                            <div id="roi-turnover-rate" class="text-lg font-bold text-red-800">--</div>
+                                        </div>
+                                        <div>
+                                            <span class="text-red-600">Cost per replacement:</span>
+                                            <div id="roi-cost-per-hire" class="text-lg font-bold text-red-800">--</div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 pt-3 border-t border-red-200">
+                                        <span class="text-red-600">Total annual turnover cost:</span>
+                                        <div id="roi-turnover-cost" class="text-2xl font-extrabold text-red-800">--</div>
+                                    </div>
+                                </div>
+
+                                <!-- Com Factorial -->
+                                <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+                                    <h4 class="font-semibold text-green-800 mb-3">✅ With Factorial</h4>
+                                    <div class="grid grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <span class="text-green-600">Annual savings:</span>
+                                            <div id="roi-total-savings" class="text-lg font-bold text-green-800">--</div>
+                                        </div>
+                                        <div>
+                                            <span class="text-green-600">Annual investment:</span>
+                                            <div id="roi-total-investment" class="text-lg font-bold text-green-800">--</div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 pt-3 border-t border-green-200">
+                                        <span class="text-green-600">Estimated ROI:</span>
+                                        <div id="roi-percent" class="text-3xl font-extrabold text-green-800">--</div>
+                                    </div>
+                                </div>
+
+                                <!-- Breakdown de Custos -->
+                                <div id="cost-breakdown" class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 border-2 border-blue-200/50 dark:border-blue-700/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+                                    <h4 class="font-semibold text-blue-800 dark:text-blue-300 mb-4 text-lg">🔍 Where do these costs come from?</h4>
+                                    <div class="space-y-3 text-sm">
+                                        <div class="bg-white/80 dark:bg-gray-800/80 p-3 rounded-lg border border-blue-200 dark:border-blue-700 flex justify-between">
+                                            <span class="text-blue-700 dark:text-blue-300">HR hours per vacancy:</span>
+                                            <span id="cost-rh" class="font-medium text-blue-800 dark:text-blue-200">--</span>
+                                        </div>
+                                        <div class="bg-white/80 dark:bg-gray-800/80 p-3 rounded-lg border border-blue-200 dark:border-blue-700 flex justify-between">
+                                            <span class="text-blue-700 dark:text-blue-300">Manager interviews:</span>
+                                            <span id="cost-manager" class="font-medium text-blue-800 dark:text-blue-200">--</span>
+                                        </div>
+                                        <div class="bg-white/80 dark:bg-gray-800/80 p-3 rounded-lg border border-blue-200 dark:border-blue-700 flex justify-between">
+                                            <span class="text-blue-700 dark:text-blue-300">Salaries (3 months):</span>
+                                            <span id="cost-salary" class="font-medium text-blue-800 dark:text-blue-200">--</span>
+                                        </div>
+                                        <div class="bg-white/80 dark:bg-gray-800/80 p-3 rounded-lg border border-blue-200 dark:border-blue-700 flex justify-between">
+                                            <span class="text-blue-700 dark:text-blue-300">Training and onboarding:</span>
+                                            <span id="cost-training" class="font-medium text-blue-800 dark:text-blue-200">--</span>
+                                        </div>
+                                        <div class="bg-white/80 dark:bg-gray-800/80 p-3 rounded-lg border border-blue-200 dark:border-blue-700 flex justify-between">
+                                            <span class="text-blue-700 dark:text-blue-300">Severance:</span>
+                                            <span id="cost-rescission" class="font-medium text-blue-800 dark:text-blue-200">--</span>
+                                        </div>
+                                        <div class="border-t border-blue-300 dark:border-blue-600 pt-3 mt-3">
+                                            <div class="bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-800/50 dark:to-indigo-800/50 p-3 rounded-lg border border-blue-300 dark:border-blue-600 flex justify-between font-bold">
+                                                <span class="text-blue-800 dark:text-blue-200">Total per replacement:</span>
+                                                <span id="cost-total-per-hire" class="text-blue-800 dark:text-blue-200 font-bold">--</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Placeholder quando não calculado -->
+                            <div id="results-placeholder" class="text-center py-16 opacity-50">
+                                <div class="text-6xl mb-4">🧮</div>
+                                <h3 class="text-xl font-bold mb-2" style="color: var(--text-primary);">Ready to calculate?</h3>
+                                <p style="color: var(--text-secondary);">Fill in the data and click "Calculate My ROI" to see the results</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab Detalhado (inicialmente oculto) -->
+                    <div id="content-detailed" class="tab-content hidden">
+                        <div class="grid lg:grid-cols-4 gap-6">
+                            <div class="lg:col-span-1 space-y-3">
+                                    <h3 class="text-sm font-bold" style="color: var(--text-primary);">📊 Basic Data</h3>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Employees</label>
+                                    <input id="roi-employees-detailed" type="number" min="1" value="100" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Separations/year</label>
+                                    <input id="roi-separations-detailed" type="number" min="0" value="20" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Average salary (R$)</label>
+                                    <input id="roi-salary-detailed" type="number" min="0" value="5000" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Benefits/Charges (%)</label>
+                                    <input id="roi-benefits-percent" type="number" min="0" max="200" value="70" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-1 space-y-3">
+                                    <h3 class="text-sm font-bold" style="color: var(--text-primary);">💰 Severance Costs</h3>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Average Payout (USD)</label>
+                                    <input id="roi-fgts-balance" type="number" min="0" value="15000" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                            </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Penalty (%)</label>
+                                    <input id="roi-fgts-penalty" type="number" min="0" max="50" value="40" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Notice period (days)</label>
+                                    <input id="roi-notice-days" type="number" min="0" value="30" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Other costs (R$)</label>
+                                    <input id="roi-other-severance" type="number" min="0" value="2000" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                        </div>
+                    </div>
+
+                            <div class="lg:col-span-1 space-y-3">
+                                <h3 class="text-sm font-bold" style="color: var(--text-primary);">🎯 Recruitment</h3>
+                            <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Ads (USD)</label>
+                                    <input id="roi-ads-cost" type="number" min="0" value="800" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                            </div>
+                            <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Agency (USD)</label>
+                                    <input id="roi-agency-cost" type="number" min="0" value="0" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                            </div>
+                            <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Referral bonus (USD)</label>
+                                    <input id="roi-referral-bonus" type="number" min="0" value="500" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Tests/Background (USD)</label>
+                                    <input id="roi-background-cost" type="number" min="0" value="200" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Days vacancy open</label>
+                                    <input id="roi-time-to-fill-detailed" type="number" min="1" value="45" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Daily value post (USD)</label>
+                                    <input id="roi-daily-value-detailed" type="number" min="0" value="400" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Team coverage (%)</label>
+                                    <input id="roi-coverage-percent" type="number" min="0" max="100" value="30" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                            </div>
+                        </div>
+                        
+                            <div class="lg:col-span-1 space-y-3">
+                                <h3 class="text-sm font-bold" style="color: var(--text-primary);">🚀 Onboarding</h3>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">HR hours</label>
+                                    <input id="roi-hr-hours" type="number" min="0" value="16" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">USD/h HR</label>
+                                    <input id="roi-hr-hour-cost" type="number" min="0" value="80" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Manager hours</label>
+                                    <input id="roi-manager-hours" type="number" min="0" value="12" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">USD/h manager</label>
+                                    <input id="roi-manager-hour-cost" type="number" min="0" value="120" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                            </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Training hours</label>
+                                    <input id="roi-training-hours" type="number" min="0" value="24" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">USD
+                                    <input id="roi-training-hour-cost" type="number" min="0" value="60" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Materials/equip (USD)</label>
+                                    <input id="roi-materials-cost" type="number" min="0" value="1500" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Ramp-up (meses)</label>
+                                    <input id="roi-ramp-months" type="number" min="1" value="3" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Productivity deficit (%)</label>
+                                    <input id="roi-ramp-deficit" type="number" min="0" max="100" value="40" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs mb-1" style="color: var(--text-secondary);">Extra coverage (USD</label>
+                                    <input id="roi-coverage-cost" type="number" min="0" value="2000" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                </div>
+                        </div>
+                    </div>
+
+                        <!-- Melhorias e Resultados  s -->
+                        <div class="grid lg:grid-cols-2 gap-8 mt-8">
+                            <div class="space-y-4">
+                                <h3 class="text-lg font-bold" style="color: var(--text-primary);">🚀 Improvements with Factorial</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs mb-1" style="color: var(--text-secondary);">Turnover reduction (%)</label>
+                                        <input id="roi-turnover-reduction-detailed" type="number" min="0" max="100" value="20" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs mb-1" style="color: var(--text-secondary);">Time-to-hire reduction (%)</label>
+                                        <input id="roi-time-reduction-detailed" type="number" min="0" max="100" value="25" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs mb-1" style="color: var(--text-secondary);">Productivity gain (%)</label>
+                                        <input id="roi-productivity-gain-detailed" type="number" min="0" max="100" value="15" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs mb-1" style="color: var(--text-secondary);">Factorial (USD/month/person)</label>
+                                        <input id="roi-software-cost-detailed" type="number" min="0" value="25" class="w-full p-2 text-sm rounded-lg border bg-white/10 calculator-input" />
+                                    </div>
+                                </div>
+                    </div>
+
+                            <div class="space-y-3">
+                                <h3 class="text-lg font-bold" style="color: var(--text-primary);">📊 Detailed Breakdown</h3>
+                                <div class="grid grid-cols-2 gap-2 text-sm">
+                                    <div class="holographic-card p-2 rounded">
+                                        <div class="text-xs opacity-70">Severance Costs</div>
+                                        <div id="roi-severance-costs" class="font-bold">--</div>
+                        </div>
+                                    <div class="holographic-card p-2 rounded">
+                                        <div class="text-xs opacity-70">Recruitment</div>
+                                        <div id="roi-recruitment-costs" class="font-bold">--</div>
+                                    </div>
+                                    <div class="holographic-card p-2 rounded">
+                                        <div class="text-xs opacity-70">Vacancy Open</div>
+                                        <div id="roi-vacancy-costs" class="font-bold">--</div>
+                                    </div>
+                                    <div class="holographic-card p-2 rounded">
+                                        <div class="text-xs opacity-70">Onboarding</div>
+                                        <div id="roi-onboarding-costs" class="font-bold">--</div>
+                                        <div id="roi-onboarding-costs" class="font-bold">--</div>
+                                    </div>
+                                    <div class="holographic-card p-2 rounded">
+                                        <div class="text-xs opacity-70">Ramp-up</div>
+                                        <div id="roi-rampup-costs" class="font-bold">--</div>
+                                        <div id="roi-rampup-costs" class="font-bold">--</div>
+                                    </div>
+                                    <div class="holographic-card p-2 rounded">
+                                        <div class="text-xs opacity-70">Extra Coverage</div>
+                                        <div id="roi-coverage-costs-result" class="font-bold">--</div>
+                                    </div>
+                                </div>
+                                <div class="holographic-card p-3 rounded-xl mt-4" style="background: linear-gradient(135deg, var(--brand-sunbeam), var(--brand-tangerine));">
+                                    <div class="text-sm text-white">Total Cost per Separation</div>
+                                    <div id="roi-cost-per-case" class="text-xl font-extrabold text-white">--</div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+
+                    <!-- Explicação da Metodologia -->
+                    <div class="mt-12 bg-gradient-to-br from-gray-50 to-blue-50 border border-gray-200 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800 text-center">🔍 How We Calculate Your ROI</h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-700 mb-4">📊 Turnover Costs (By Replacement)</h4>
+                                <div class="space-y-3 text-sm text-gray-600">
+                                    <div class="flex justify-between">
+                                        <span>• HR hours (8h28min × €24/h):</span>
+                                        <span class="font-medium dynamic-currency" data-value="203">--</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>• Manager interviews (4h × €47/h):</span>
+                                        <span class="font-medium dynamic-currency" data-value="188">--</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>• 3 months salary (your input):</span>
+                                        <span class="font-medium">Variável</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>• Training (30h×€30 + others):</span>
+                                        <span class="font-medium dynamic-currency" data-value="1636">--</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>• Separations (simplified average):</span>
+                                        <span class="font-medium dynamic-currency" data-value="2798">--</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-700 mb-4">🚀 Benefits of Factorial</h4>
+                                <div class="space-y-3 text-sm text-gray-600">
+                                    <div class="bg-green-50 p-3 rounded-lg">
+                                        <strong class="text-green-800">Turnover Reduction:</strong>
+                                        <p class="mt-1">ATS automatizado, onboarding padronizado e melhor gestão de pessoas reduzem saídas.</p>
+                                    </div>
+                                    <div class="bg-blue-50 p-3 rounded-lg">
+                                        <strong class="text-blue-800">Economia = </strong>
+                                        <p class="mt-1">Custo Total Turnover × % Redução - Investimento Factorial</p>
+                                    </div>
+                                    <div class="bg-purple-50 p-3 rounded-lg">
+                                        <strong class="text-purple-800">ROI = </strong>
+                                        <p class="mt-1">(Economia - Investimento) ÷ Investimento × 100</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <p class="text-sm text-yellow-800">
+                                <strong>💡 Note:</strong> Calculations based on Brazilian market data and HR studies. 
+                                Values may vary according to sector and company size. Use as an initial estimate.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <div class="chart-container bg-gradient-to-br from-white via-blue-50 to-indigo-50 rounded-3xl shadow-2xl p-8 relative overflow-hidden border border-blue-100">
+                            <!-- Header com gradiente mais atrativo -->
+                            <div class="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white p-6 rounded-t-3xl">
+                                <div class="flex items-center justify-center space-x-3">
+                                    <div class="text-2xl">📈</div>
+                                    <h3 class="text-xl font-bold text-center">Monthly benefit evolution (12 months)</h3>
+                                    <div class="text-2xl">🚀</div>
+                                </div>
+                                <p class="text-center text-blue-100 text-sm mt-2">Visualize the growth of ROI over time</p>
+                            </div>
+                            
+                            <!-- Container do gráfico com melhor espaçamento -->
+                            <div class="mt-20 mb-6 px-4">
+                                <canvas id="roiChart" class="w-full h-80"></canvas>
+                            </div>
+                            
+                            <!-- Footer informativo -->
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-gray-50 to-blue-50 p-4 rounded-b-3xl border-t border-blue-200">
+                                <div class="flex justify-between items-center text-sm text-gray-600">
+                                    <span>💡 Data based on your calculator</span>
+                                    <span>🔄 Update in real time</span>
+                                    <span>📊 Monthly accumulated ROI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Alliance Section -->
+<section id="alliance" class="py-20 relative z-10" style="background: var(--bg-primary);">
+    <div class="container mx-auto px-6">
+        <!-- Heading -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-[var(--brand-midnight)] mb-6">
+                <span class="cyber-text">WHY FACTORIAL?</span>
+                <br>
+                <span class="neon-text">EFFICIENCY, DATA, ROI</span>
+                <br>
+                <span class="gradient-text">IN ONE PLACE</span>
+            </h2>
+            <p class="mt-4 text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                Centralize recruitment, onboarding, time, vacations, payroll and much more. Automate processes and measure results with strategic reports.
+            </p>
+            <div class="mt-6 inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl">
+                🌟 Simples. Completo. Factorial.
+            </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="solution-card relative bg-[#F0F4F8] p-8 rounded-xl text-center opacity-0">
+                <div class="text-4xl text-[var(--brand-sunbeam)] mb-4">🤝</div>
+                <h3 class="text-xl font-bold text-[var(--brand-midnight)] mb-2">Employee experience</h3>
+                <p class="text-gray-600">Standardized onboarding and offboarding, task trails and digital documents.</p>
+            </div>
+            <div class="solution-card relative bg-[#F0F4F8] p-8 rounded-xl text-center opacity-0">
+                <div class="text-4xl text-[var(--brand-sunbeam)] mb-4">🚀</div>
+                <h3 class="text-xl font-bold text-[var(--brand-midnight)] mb-2">Recruitment & selection</h3>
+                <p class="text-gray-600">Jobs, pipeline, automations, evaluations and time tracking reports.</p>
+            </div>
+            <div class="solution-card relative bg-[#F0F4F8] p-8 rounded-xl text-center opacity-0">
+                <div class="text-4xl text-[var(--brand-sunbeam)] mb-4">📈</div>
+                <h3 class="text-xl font-bold text-[var(--brand-midnight)] mb-2">Strategic reports</h3>
+                <p class="text-gray-600">KPIs of turnover, absences, headcount and ROI in one panel.</p>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="text-center mt-12">
+            <a href="#roi" 
+               class="inline-block bg-[var(--brand-sunbeam)] text-[var(--brand-midnight)] font-bold py-3 px-8 rounded-lg text-lg hover:opacity-90 transition-opacity">
+               Calculate ROI now
+            </a>
+        </div>
+    </div>
+
+    <!-- GSAP Animation (Local, sem afetar outros cards) -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('#alliance .solution-card').forEach((card, i) => {
+            gsap.fromTo(card, 
+                {y: 50, opacity: 0}, 
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 80%'
+                    },
+                    delay: i * 0.2
+                }
+            );
+        });
+    </script>
+</section>
+
+    <!-- Enhanced Footer -->
+    <footer class="py-16 relative overflow-hidden" style="background: var(--bg-tertiary); color: var(--text-primary);">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full animate-ping"></div>
+            <div class="absolute top-20 right-20 w-24 h-24 bg-purple-500 rounded-full animate-pulse"></div>
+            <div class="absolute bottom-20 left-1/4 w-28 h-28 bg-green-500 rounded-full animate-bounce"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <div class="mb-12">
+                <h3 class="text-4xl font-bold mb-6">
+                    <span class="cyber-text">Factorial HR</span>
+                </h3>
+                <p class="text-xl opacity-90 mb-6">HR technology to simplify processes and maximize results.</p>
+                <div class="inline-block bg-gradient-to-r from-[var(--brand-radical)] to-[var(--brand-tangerine)] text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl">
+                    🚀 Ready to calculate your ROI?
+                </div>
+            </div>
+            
+            <!-- Enhanced contact section -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="holographic-card p-6 rounded-xl">
+                    <h4 class="text-xl font-bold mb-4 neon-text">🚀 Start Today</h4>
+                    <p class="mb-4">Ready to boost your HR? Let's make it happen!</p>
+                    <a href="#roi" class="cyber-button inline-block px-6 py-3 rounded-lg">📊 Open calculator</a>
+                </div>
+                <div class="holographic-card p-6 rounded-xl">
+                    <h4 class="text-xl font-bold mb-4 neon-text">💡 Learn more</h4>
+                    <p class="mb-4">Discover how Factorial can transform your company</p>
+                    <a href="#solution" class="cyber-button inline-block px-6 py-3 rounded-lg">🔍 View features</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8">
+                <p class="text-lg">&copy; 2025 Factorial HR. All rights reserved.</p>
+                <p class="text-sm mt-2 opacity-75">ROI in HR in a simple, visual and measurable way.</p>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <span class="text-yellow-400">⚡</span>
+                    <span class="text-blue-400">🚀</span>
+                    <span class="text-green-400">🌟</span>
+                    <span class="text-purple-400">💎</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize GSAP
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+        
+        // Particle System Configuration (Disabled for better performance and UX)
+        // particlesJS('particles-js', {
+        //     particles: {
+        //         number: { value: 80, density: { enable: true, value_area: 800 } },
+        //         color: { value: ['#07A2AD', '#FF9153', '#FFB940', '#FF355E'] },
+        //         shape: { type: 'circle' },
+        //         opacity: { value: 0.5, random: false },
+        //         size: { value: 3, random: true },
+        //         line_linked: {
+        //             enable: true,
+        //             distance: 150,
+        //             color: '#07A2AD',
+        //             opacity: 0.4,
+        //             width: 1
+        //         },
+        //         move: {
+        //             enable: true,
+        //             speed: 2,
+        //             direction: 'none',
+        //             random: false,
+        //             straight: false,
+        //             out_mode: 'out',
+        //             bounce: false
+        //         }
+        //     },
+        //     interactivity: {
+        //         detect_on: 'canvas',
+        //         events: {
+        //             onhover: { enable: true, mode: 'repulse' },
+        //             onclick: { enable: true, mode: 'push' },
+        //             resize: true
+        //         },
+        //         modes: {
+        //             repulse: { distance: 100, duration: 0.4 },
+        //             push: { particles_nb: 4 }
+        //         }
+        //     },
+        //     retina_detect: true
+        // });
+        
+        // Loading Screen Management
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                gsap.to(loadingScreen, {
+                    opacity: 0,
+                    duration: 1,
+                    onComplete: () => {
+                        loadingScreen.style.display = 'none';
+                        // Trigger entrance animations
+                        gsap.from('body', { opacity: 0, duration: 1 });
+                    }
+                });
+            }, 2000);
+        });
+        
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+        
+        // Menu Lateral de Navegação
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarClose = document.getElementById('sidebarClose');
+        
+        // Debug: Verificar se os elementos foram encontrados
+        console.log('🔍 Debug Sidebar:', {
+            sidebarToggle: sidebarToggle,
+            sidebar: sidebar,
+            sidebarOverlay: sidebarOverlay,
+            sidebarClose: sidebarClose
+        });
+        
+        // Teste adicional: Verificar se o botão está visível e clicável
+        if (sidebarToggle) {
+            console.log('🎯 Botão sidebar encontrado, verificando propriedades...');
+            console.log('📍 Posição:', sidebarToggle.getBoundingClientRect());
+            console.log('🎨 Estilos:', window.getComputedStyle(sidebarToggle));
+            
+            // Adicionar um event listener de teste simples
+            sidebarToggle.addEventListener('mousedown', () => {
+                console.log('🖱️ Mousedown detectado no botão sidebar!');
+            });
+            
+            sidebarToggle.addEventListener('mouseup', () => {
+                console.log('🖱️ Mouseup detectado no botão sidebar!');
+            });
+        }
+        
+        // Abrir menu lateral
+        if (sidebarToggle && sidebar && sidebarOverlay) {
+            sidebarToggle.addEventListener('click', (e) => {
+                console.log('🎯 Botão sidebar clicado!');
+                e.preventDefault();
+                sidebar.classList.add('open');
+                sidebarOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                console.log('✅ Sidebar aberto com sucesso!');
+            });
+        } else {
+            console.error('❌ Elementos do sidebar não encontrados!');
+        }
+        
+        // Fechar menu lateral
+        function closeSidebar() {
+            if (sidebar && sidebarOverlay) {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+                console.log('✅ Sidebar fechado com sucesso!');
+            }
+        }
+        
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', closeSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebar);
+        }
+        
+        // Fechar com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+        
+        // Navegação do menu lateral
+        document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(item.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    closeSidebar();
+                }
+            });
+        });
+        
+        // Marcar item ativo no menu
+        function updateActiveMenuItem() {
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('.sidebar-nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveMenuItem);
+        
+        // Enhanced Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.createElement('div');
+        mobileMenu.className = 'fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 z-50 transform translate-x-full transition-transform duration-300';
+        mobileMenu.innerHTML = `
+            <div class="flex justify-between items-center p-6">
+                <div class="text-2xl font-bold text-white">🚀 Factorial RH</div>
+                <button id="close-menu" class="text-white text-3xl">&times;</button>
+            </div>
+            <div class="flex flex-col items-center justify-center h-full space-y-8">
+                <a href="#sobre" class="text-2xl text-white hover:text-yellow-400 transition-colors">Sobre</a>
+                <a href="#roi" class="text-2xl text-white hover:text-yellow-400 transition-colors">Calculadora de ROI</a>
+                <a href="#solution" class="text-2xl text-white hover:text-yellow-400 transition-colors">Recursos</a>
+            </div>
+        `;
+        document.body.appendChild(mobileMenu);
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        
+        document.getElementById('close-menu').addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.solution-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Hide all tab contents
+                tabContents.forEach(content => content.classList.add('hidden'));
+                
+                // Show selected tab content
+                const targetTab = tab.getAttribute('data-tab');
+                document.getElementById(targetTab).classList.remove('hidden');
+            });
+        });
+        
+        // Animated counter for statistics
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function updateCounter() {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            }
+            
+            updateCounter();
+        }
+        
+        // Intersection Observer for counter animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    animateCounter(entry.target, target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.querySelectorAll('[data-target]').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Respect persisted reducedMotion preference on load
+        (function applyPersistedReducedMotion() {
+            try {
+                const pref = localStorage.getItem('reducedMotion');
+                if (pref === '1') {
+                    document.body.classList.add('reduced-motion');
+                    document.documentElement.style.setProperty('--theme-transition','0s');
+                    // Pause GSAP timeline if available
+                    if (window.gsap && gsap.globalTimeline) gsap.globalTimeline.pause();
+                }
+            } catch(e) { /* ignore */ }
+        })();
+        
+        // ROI overview chart (monthly)
+        const ctx = document.getElementById('pixChart').getContext('2d');
+        const gradientBenefit = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientBenefit.addColorStop(0, 'rgba(255, 145, 83, 0.9)');
+        gradientBenefit.addColorStop(1, 'rgba(255, 145, 83, 0.3)');
+        const gradientInvestment = ctx.createLinearGradient(0, 0, 0, 400);
+        gradientInvestment.addColorStop(0, 'rgba(7, 162, 173, 0.9)');
+        gradientInvestment.addColorStop(1, 'rgba(7, 162, 173, 0.3)');
+
+        const labelsROI = Array.from({length: 12}, (_, i) => `M${i+1}`);
+        const pixChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelsROI,
+                datasets: [
+                    { label: 'Benefício mensal', data: new Array(12).fill(0), backgroundColor: gradientBenefit },
+                    { label: 'Investimento mensal', data: new Array(12).fill(0), backgroundColor: gradientInvestment }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'top', labels: { color: 'var(--text-primary)' } } },
+                scales: { y: { beginAtZero: true, ticks: { color: 'var(--text-secondary)' } }, x: { ticks: { color: 'var(--text-secondary)' } } },
+                animation: { duration: 800 }
+            }
+        });
+        
+        // Add chart entrance animation
+        gsap.from('#pixChart', {
+            duration: 1.5,
+            opacity: 0,
+            scale: 0.8,
+            y: 50,
+            ease: 'back.out(1.7)',
+            scrollTrigger: {
+                trigger: '#pixChart',
+                start: 'top 80%'
+            }
+        });
+        
+        // Enhanced GSAP Animations
+        gsap.from('.hero-gradient h1', {
+            duration: 1.5,
+            y: 50,
+            opacity: 0,
+            ease: 'power2.out'
+        });
+        
+        gsap.from('.hero-gradient p', {
+            duration: 1.5,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+        
+        gsap.from('.hero-gradient a', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.6,
+            stagger: 0.2
+        });
+        
+        // Enhanced text animations
+        gsap.from('.neon-text', {
+            duration: 1.5,
+            opacity: 0,
+            scale: 0.8,
+            ease: 'back.out(1.7)',
+            delay: 1,
+            stagger: 0.1
+        });
+        
+        // Subtle floating animation
+        function startFloatingAnimations() {
+            gsap.to('.floating-3d', {
+                y: -10,
+                duration: 4,
+                ease: 'power1.inOut',
+                repeat: -1,
+                yoyo: true,
+                stagger: 0.5
+            });
+        }
+
+        // Start by default
+        startFloatingAnimations();
+
+        // Pause/resume floating animations when reduced motion toggled
+        document.addEventListener('reducedMotionToggled', (e) => {
+            if (e.detail.reduced) {
+                gsap.globalTimeline.pause();
+            } else {
+                gsap.globalTimeline.resume();
+            }
+        });
+        
+        // Enhanced Scroll-triggered animations
+        gsap.from('.stat-counter', {
+            scrollTrigger: {
+                trigger: '.stat-counter',
+                start: 'top 80%'
+            },
+            duration: 1.5,
+            y: 100,
+            opacity: 0,
+            scale: 0.5,
+            ease: 'back.out(1.7)',
+            stagger: 0.3,
+            onComplete: () => {
+                // Add glow effect after animation
+                gsap.to('.stat-counter', {
+                    duration: 0.5,
+                    textShadow: '0 0 20px currentColor',
+                    yoyo: true,
+                    repeat: 1
+                });
+            }
+        });
+        
+        gsap.from('.card-hover', {
+            scrollTrigger: {
+                trigger: '.card-hover',
+                start: 'top 80%'
+            },
+            duration: 1.2,
+            y: 100,
+            opacity: 0,
+            rotationY: 45,
+            ease: 'power3.out',
+            stagger: 0.2
+        });
+        
+        // Holographic card effects
+        gsap.from('.holographic-card', {
+            scrollTrigger: {
+                trigger: '.holographic-card',
+                start: 'top 80%'
+            },
+            duration: 1.5,
+            y: 80,
+            opacity: 0,
+            scale: 0.8,
+            rotationX: 15,
+            ease: 'power3.out',
+            stagger: 0.3
+        });
+        
+        // Subtle parallax effect for floating elements
+        gsap.to('.floating', {
+            y: -30,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.hero-gradient',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+            }
+        });
+        
+        // Simple counter animation
+        function animateCounterWithImpact(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function updateCounter() {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            }
+            
+            updateCounter();
+        }
+    </script>
+
+    <!-- 🚀 ULTIMATE ADVANCED FEATURES SYSTEM -->
+    <script>
+        // Ensure advanced features load after everything else
+        window.addEventListener('load', function() {
+            // Load advanced features script dynamically
+            const script = document.createElement('script');
+            script.src = 'advanced-features.js';
+            script.onload = function() {
+                console.log('🚀 Ultimate Advanced Features Loaded Successfully!');
+                
+                // 🔍 DEBUG: Verificar se a calculadora ROI está funcionando
+                console.log('🔍 Verificando inicialização da calculadora ROI...');
+                
+                // Aguardar um pouco para garantir que tudo foi carregado
+                setTimeout(function() {
+                    // Verificar se a calculadora foi inicializada
+                    if (window.FactorialROICalculator) {
+                        console.log('✅ Calculadora ROI inicializada:', window.FactorialROICalculator);
+                    } else {
+                        console.log('❌ Calculadora ROI NÃO foi inicializada!');
+                        
+                        // Tentar inicializar manualmente
+                        if (typeof ROICalculator !== 'undefined') {
+                            console.log('🔄 Tentando inicializar manualmente...');
+                            try {
+                                window.FactorialROICalculator = new ROICalculator();
+                                console.log('✅ Calculadora inicializada manualmente!');
+                            } catch (e) {
+                                console.error('❌ Erro ao inicializar manualmente:', e);
+                            }
+                        } else {
+                            console.log('❌ Classe ROICalculator não encontrada!');
+                        }
+                    }
+                    
+                    // Verificar se o botão está funcionando
+                    const btn = document.getElementById('calculate-roi-btn');
+                    if (btn) {
+                        console.log('✅ Botão encontrado:', btn);
+                        
+                        // Adicionar event listener de teste se não houver nenhum
+                        if (!btn.hasAttribute('data-test-listener')) {
+                            btn.setAttribute('data-test-listener', 'true');
+                            btn.addEventListener('click', function(e) {
+                                console.log('🎯 Botão clicado! Verificando calculadora...');
+                                
+                                if (window.FactorialROICalculator) {
+                                    console.log('✅ Calculadora disponível, executando cálculo...');
+                                    window.FactorialROICalculator.performCalculation();
+                                } else {
+                                    console.log('❌ Calculadora não disponível!');
+                                    alert('Calculadora não está funcionando. Verifique o console para mais detalhes.');
+                                }
+                            });
+                            console.log('✅ Event listener de teste adicionado ao botão');
+                        }
+                    } else {
+                        console.log('❌ Botão NÃO encontrado!');
+                    }
+                }, 1000); // Aguardar 1 segundo
+                
+                // Ensure the currency calculator is initialized even if the script loaded after DOMContentLoaded
+                try {
+                    const hasCalculator = document.getElementById('amount-input');
+                    if (hasCalculator && typeof window.CurrencyCalculator === 'undefined' && typeof CurrencyCalculator !== 'undefined') {
+                        window.CurrencyCalculator = new CurrencyCalculator();
+                        console.log('💱 Currency Calculator initialized (post-load).');
+                    }
+                } catch (e) {
+                    console.warn('⚠️ Failed to initialize Currency Calculator after script load:', e);
+                }
+            };
+            script.onerror = function() {
+                console.warn('⚠️ Advanced features not loaded - using fallback styles');
+            };
+            document.head.appendChild(script);
+        });
+        
+        // Force re-apply holographic effects after DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const holographicCards = document.querySelectorAll('.holographic-card-ultimate');
+                holographicCards.forEach(function(card, index) {
+                    // Add a small delay for each card to ensure they appear
+                    setTimeout(function() {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                        card.classList.add('loaded');
+                    }, index * 200);
+                });
+            }, 100);
+        });
+        
+        // 🔍 DEBUG: Verificar se a calculadora ROI está funcionando
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔍 Verificando inicialização da calculadora ROI...');
+            
+            // Aguardar um pouco para o script advanced-features.js carregar
+            setTimeout(function() {
+                console.log('🔍 Verificando após delay...');
+                
+                // Verificar se a calculadora foi inicializada
+                if (window.FactorialROICalculator) {
+                    console.log('✅ Calculadora ROI inicializada:', window.FactorialROICalculator);
+                } else {
+                    console.log('❌ Calculadora ROI NÃO foi inicializada!');
+                    
+                    // Tentar inicializar manualmente
+                    if (typeof ROICalculator !== 'undefined') {
+                        console.log('🔄 Tentando inicializar manualmente...');
+                        try {
+                            window.FactorialROICalculator = new ROICalculator();
+                            console.log('✅ Calculadora inicializada manualmente!');
+                        } catch (e) {
+                            console.error('❌ Erro ao inicializar manualmente:', e);
+                        }
+                    } else {
+                        console.log('❌ Classe ROICalculator não encontrada!');
+                    }
+                }
+                
+                // Verificar se o botão está funcionando
+                const btn = document.getElementById('calculate-roi-btn');
+                if (btn) {
+                    console.log('✅ Botão encontrado:', btn);
+                    // Verificar se já tem event listeners
+                    const clone = btn.cloneNode(true);
+                    console.log('🔍 Botão clonado para teste:', clone);
+                } else {
+                    console.log('❌ Botão NÃO encontrado!');
+                }
+            }, 2000); // Aguardar 2 segundos
+        });
+    </script>
+
+    <!-- Floating Settings UI (Theme / Accessibility) -->
+    <div id="ui-settings" class="ui-settings theme-transition" style="position:fixed;left:1rem;bottom:1rem;z-index:10001;background:var(--brand-midnight);color:var(--brand-sunbeam);padding:12px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.4);">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+            <button id="toggle-theme" class="cyber-button">Alternar Tema</button>
+            <button id="toggle-reduced-motion" class="cyber-button">Reduzir Animações</button>
+        </div>
+    </div>
+
+    <script>
+    (function(){
+        // Wire UI settings to persisted preferences
+        const tBtn = document.getElementById('toggle-theme');
+        // contrast control removed
+        const rBtn = document.getElementById('toggle-reduced-motion');
+
+        if (tBtn) {
+            tBtn.addEventListener('click', () => {
+                const cur = document.documentElement.getAttribute('data-theme') || 'light';
+                const next = cur === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+        }
+
+        // High contrast toggle removed (button deleted). Clean up: ensure no high-contrast class remains.
+        if (document.body.classList.contains('high-contrast-mode')) {
+            document.body.classList.remove('high-contrast-mode');
+            try { localStorage.removeItem('highContrast'); } catch(e) { /* ignore */ }
+        }
+
+        if (rBtn) {
+            rBtn.addEventListener('click', () => {
+                // Toggle class for CSS reduced-motion
+                const on = document.body.classList.toggle('reduced-motion');
+
+                // Also persist preference
+                localStorage.setItem('reducedMotion', on ? '1' : '0');
+
+                // Apply a CSS variable to instantly disable transitions where used
+                if (on) {
+                    document.documentElement.style.setProperty('--theme-transition','0s');
+                } else {
+                    document.documentElement.style.removeProperty('--theme-transition');
+                }
+
+                // For animations driven by JS, dispatch an event so scripts can react
+                const evt = new CustomEvent('reducedMotionToggled', { detail: { reduced: on } });
+                document.dispatchEvent(evt);
+            });
+        }
+    })();
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

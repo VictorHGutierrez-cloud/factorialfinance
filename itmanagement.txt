@@ -1,0 +1,20 @@
+IT Management
+Easily manage your company software, and SaaS cost control.
+Contract Renewal Notifications
+Stay informed with timely notifications for SaaS contract renewals, preventing disruptions in software services.
+Insightful Dashboard and Reports
+Access a comprehensive dashboard offering insights and reports on SaaS usage and associated costs.
+Streamlined Payment Approval Workflows
+Set up approval flows to ensure smooth processing of SaaS payments.
+Seamless SaaS Subscription Payments
+Automate SaaS subscription payments with the convenience of Factorial Cards.
+Cost-Efficient Software Management
+Effectively manage software costs within your organisation.
+Employee Software Tracking
+Keep a close eye on software usage across your workforce.
+Export transaction details to excel
+Easily export transaction details to Excel for thorough financial analyses.
+Setup approval flows for SaaS payments
+Set up approval flows to ensure smooth processing of SaaS payments.
+Terminated User Software Control
+Receive timely alerts for software access revocation, enhancing security and compliance.

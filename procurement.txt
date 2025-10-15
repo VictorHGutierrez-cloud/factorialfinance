@@ -1,0 +1,10 @@
+Procurement
+Seize control of your company’s spending and empower every employee with guided approval processes.
+Centralize all your purchase requests
+Export purchase orders
+ Vendor creation and management
+Purchase orders management
+Build dedicated approval workflows
+Create single-use cards linked to the orders
+Invoice processing
+Custom approval workflows by type of requests

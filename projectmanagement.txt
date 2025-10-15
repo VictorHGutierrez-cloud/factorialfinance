@@ -1,0 +1,18 @@
+Manage projects inside Factorial
+Create subprojects within main projects
+Duplicate projects and its subprojects
+Associate hours to projects and track project time
+Import Projects, Subprojects and asigned employees through an automated import solution
+Gain insights through the Projects Overview section
+Integrate projects from other tools or sources via API
+Elevate project depth with key specifics like start date, due date, and internal code
+Assign an employee to the Project Manager role
+Appoint a Project Director for comprehensive project oversight
+Budget time strategically for precise project planning
+Monitor and control project's cost per employee
+Record and monitor expenses within projects
+Enterprise
+Analyze project trends with Trendline features such as data range, hours evolution chart and time distribution
+Enterprise
+Handle projects costs in diverse currencies
+Enterprise

@@ -1,0 +1,25 @@
+Expenses
+Centralize your expense management in one software and track your company expenses to save time.
+Real-time expense tracking
+Gain visibility and make decisions by analysing your company’s expense journey
+Smart document reading (OCR)
+Scan your documents and invoices to fill expenses fields automatically
+Approval flows with multiple steps
+Define and create multiple steps for approval of your expenses
+Insights and reports
+Make strategic decisions based on the data and analytics that Factorial provides you with.
+Reimburse of expenses through Payroll
+Enterprise
+Reimburse the amount of expenses charged directly to your employees’ payslips
+Unlimited approval policies
+Enterprise
+Allow your team managers to approve their employees’ expenses by creating multiple expenses policies.
+Multiple approvers per level 
+Enterprise
+Define multiple approvers for each phase of your expenses approval flows
+Smart rules for auto-approvals
+Enterprise
+Ease-up the workload of approving expenses by setting auto-approval rules based on certain defined expense types, amounts, etc.
+Custom subcategories
+Enterprise
+Taxes, cost centre synchronisation and more, directly in the expense form.

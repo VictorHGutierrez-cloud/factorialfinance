@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente de Pitch Estratégico - Factorial Portugal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .flow-step {
+            border: 2px solid #e0e0e0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            background-color: #f9fafb;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #9ca3af;
+            margin: 0.5rem 0;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #004e92;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-[#000428]">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#004e92] mb-2">O Guia Essencial para a Gestão Financeira em Portugal</h1>
+            <p class="text-lg text-[#4286f4] max-w-3xl mx-auto">Como a Factorial transforma os desafios do mercado português em oportunidades de crescimento para a sua empresa.</p>
+        </header>
+
+        <main>
+            <section class="mb-16">
+                <div class="card grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-[#004e92] mb-4">O Ecossistema de Negócios Português</h2>
+                        <p class="mb-4">O mercado em Portugal é esmagadoramente impulsionado por Pequenas e Médias Empresas (PMEs). Este grupo representa a espinha dorsal da economia, mas enfrenta desafios únicos de agilidade e conformidade fiscal, onde a eficiência na gestão é a chave para o sucesso.</p>
+                        <div class="bg-[#e0e0e0] p-4 rounded-lg">
+                            <p class="text-5xl font-bold text-center text-[#004e92]">99.9%</p>
+                            <p class="text-center font-semibold text-[#000428]">das empresas em Portugal são PMEs.</p>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="pmeChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-center text-[#004e92] mb-2">O Principal Desafio: Complexidade Fiscal e Processos Manuais</h2>
+                <p class="text-center text-lg max-w-3xl mx-auto mb-8">A gestão do IVA (Imposto sobre o Valor Acrescentado) e os fluxos de aprovação de despesas são dos maiores consumidores de tempo e fontes de erro para as PMEs portuguesas. A conformidade com as obrigações fiscais, como o ficheiro SAF-T, exige rigor absoluto.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <h3 class="text-2xl font-semibold text-center mb-4">As Taxas de IVA em Portugal</h3>
+                        <p class="text-center mb-4">Gerir múltiplas taxas de IVA em despesas e faturas é um desafio constante.</p>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="ivaChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-2xl font-semibold text-center mb-6">Fluxos de Despesas: Antes vs. Depois da Factorial</h3>
+                        <div>
+                            <h4 class="font-bold text-center mb-2 text-red-600">Processo Manual Tradicional</h4>
+                            <div class="flow-step"><span>Registo Manual da Despesa</span></div>
+                            <div class="flow-arrow"><span>↓</span></div>
+                            <div class="flow-step"><span>Procura do Aprovador</span></div>
+                            <div class="flow-arrow"><span>↓</span></div>
+                            <div class="flow-step"><span>Contabilidade Verifica o IVA</span></div>
+                            <div class="flow-arrow"><span>↓</span></div>
+                            <div class="flow-step"><span>Reembolso no final do mês</span></div>
+                        </div>
+                        <hr class="my-6">
+                        <div>
+                            <h4 class="font-bold text-center mb-2 text-green-600">Processo Automatizado com a Factorial</h4>
+                            <div class="flow-step bg-green-50 border-green-300"><span>Scan do Recibo (OCR)</span></div>
+                            <div class="flow-arrow text-green-500"><span>↓</span></div>
+                            <div class="flow-step bg-green-50 border-green-300"><span>Aprovação Automática por Regras</span></div>
+                            <div class="flow-arrow text-green-500"><span>↓</span></div>
+                            <div class="flow-step bg-green-50 border-green-300"><span>Reembolso no Recibo de Vencimento</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-center text-[#004e92] mb-8">A Solução Integrada da Factorial</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div class="card">
+                        <h3 class="text-2xl font-semibold mb-4 text-[#4286f4]">🚀 Gestão de Despesas</h3>
+                        <p class="mb-2"><span class="font-bold">✓ Leitura Inteligente (OCR):</span> Acabe com a inserção manual e erros de IVA.</p>
+                        <p class="mb-2"><span class="font-bold">✓ Fluxos de Aprovação:</span> Defina regras personalizadas para aprovações automáticas e controlo total.</p>
+                        <p class="mb-2"><span class="font-bold">✓ Reembolso via Recibo de Vencimento:</span> Simplifique o pagamento aos colaboradores de forma centralizada.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-2xl font-semibold mb-4 text-[#4286f4]">📊 Gestão de Projetos</h3>
+                        <p class="mb-2"><span class="font-bold">✓ Orçamentação Precisa:</span> Controle custos por projeto, incluindo horas e despesas.</p>
+                        <p class="mb-2"><span class="font-bold">✓ Monitorização de Custos:</span> Associe cada despesa a um projeto e analise a rentabilidade em tempo real.</p>
+                        <p class="mb-2"><span class="font-bold">✓ Visão Geral e Relatórios:</span> Tome decisões informadas com dashboards completos.</p>
+                    </div>
+                    
+                    <div class="card">
+                         <h3 class="text-2xl font-semibold mb-4 text-[#4286f4]">⚙️ Gestão de Software e Requisições</h3>
+                        <p class="mb-2"><span class="font-bold">✓ Controlo de Custos SaaS:</span> Evite renovações indesejadas e monitorize o uso de software.</p>
+                        <p class="mb-2"><span class="font-bold">✓ Requisições Centralizadas:</span> Simplifique os pedidos de compra com fluxos de aprovação claros.</p>
+                        <p class="mb-2"><span class="font-bold">✓ Cartões de Uso Único:</span> Aumente a segurança dos pagamentos associados a requisições.</p>
+                    </div>
+
+                </div>
+                 <div class="card mt-8 md:col-span-3">
+                    <h3 class="text-2xl font-semibold text-center mb-4">Análise de Rentabilidade de Projeto</h3>
+                    <p class="text-center mb-4">Com a Factorial, é fácil visualizar a composição dos custos de cada projeto e garantir que se mantém dentro do orçamento.</p>
+                    <div class="chart-container" style="max-width: 800px;">
+                        <canvas id="projectCostChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assistente de Pitch com OpenAI -->
+            <section class="mb-16 border-t pt-8 border-[#004e92]">
+                <div class="card bg-[#e3f2fd]">
+                    <h2 class="text-3xl font-bold text-[#004e92] mb-4 flex items-center">
+                        Assistente de Pitch Estratégico ✨ (OpenAI)
+                    </h2>
+                    <p class="mb-6 text-gray-700">Gere conteúdo de pitch personalizado e argumentos de venda focados nas necessidades do cliente português. Otimize a sua mensagem com o poder da Inteligência Artificial da OpenAI.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                        <div class="md:col-span-3">
+                            <label for="pitchTopic" class="block font-medium mb-1 text-[#004e92]">Tópico ou Desafio para o Pitch:</label>
+                            <textarea id="pitchTopic" rows="3" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-[#4286f4] focus:border-[#4286f4]" placeholder="Ex: Crie 3 argumentos persuasivos para vender a Gestão de Despesas a um CTO no Porto."></textarea>
+                        </div>
+                        <div>
+                            <label for="pitchTone" class="block font-medium mb-1 text-[#004e92]">Tom:</label>
+                            <select id="pitchTone" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-[#4286f4] focus:border-[#4286f4] appearance-none">
+                                <option value="Persuasivo e Profissional">Persuasivo e Profissional</option>
+                                <option value="Direto e Conciso">Direto e Conciso</option>
+                                <option value="Amigável e Empático">Amigável e Empático</option>
+                                <option value="Detalhado e Técnico">Detalhado e Técnico</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="generatePitchBtn" onclick="generatePitchContent()" class="w-full md:w-auto bg-[#004e92] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#003d73] transition duration-200 flex items-center justify-center" disabled>
+                        <span id="btnText">Gerar Pitch ✨</span>
+                        <div id="loaderSpinner" class="loader ml-3 hidden"></div>
+                    </button>
+
+                    <div id="pitchOutput" class="mt-8 pt-4 border-t border-[#4286f4]">
+                        <h3 class="text-xl font-semibold text-[#004e92] mb-3">Resultado:</h3>
+                        <div id="generatedContent" class="min-h-[100px] p-4 bg-white border border-gray-200 rounded-lg whitespace-pre-wrap text-gray-800">
+                            Aguardando o seu tópico de pitch...
+                        </div>
+                        <div id="citations" class="text-xs mt-2 text-gray-500"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t border-[#e0e0e0]">
+            <p class="font-bold text-2xl text-[#004e92]">A Factorial é o seu parceiro estratégico para a eficiência e conformidade em Portugal.</p>
+            <p class="text-lg mt-2">Transforme a complexidade em simplicidade e foque-se no que realmente importa: o crescimento do seu negócio.</p>
+        </footer>
+    </div>
+    <script>
+        const FONT_COLOR = '#000428';
+        const GRID_COLOR = '#e0e0e0';
+        const CHART_COLORS = ['#004e92', '#4286f4', '#00c6ff', '#64b5f6'];
+        
+        // Configuração da OpenAI - SUBSTITUA pela sua chave de API
+        const apiKey = "SUA_CHAVE_OPENAI_AQUI";
+        
+        // Usar proxy para resolver CORS
+        const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+        const apiUrl = proxyUrl + "https://api.openai.com/v1/chat/completions";
+
+        // Utility to handle button state and loading spinner
+        const btn = document.getElementById('generatePitchBtn');
+        const btnText = document.getElementById('btnText');
+        const loader = document.getElementById('loaderSpinner');
+        const topicInput = document.getElementById('pitchTopic');
+
+        function setButtonState(isLoading) {
+            btn.disabled = isLoading || topicInput.value.trim() === '';
+            if (isLoading) {
+                btnText.textContent = 'A Gerar...';
+                loader.classList.remove('hidden');
+            } else {
+                btnText.textContent = 'Gerar Pitch ✨';
+                loader.classList.add('hidden');
+            }
+        }
+        
+        topicInput.addEventListener('input', () => {
+             setButtonState(false); 
+        });
+
+        // LLM Function
+        async function generatePitchContent() {
+            const topic = document.getElementById('pitchTopic').value.trim();
+            const tone = document.getElementById('pitchTone').value;
+            const outputDiv = document.getElementById('generatedContent');
+            const citationsDiv = document.getElementById('citations');
+
+            if (topic === "") {
+                outputDiv.innerHTML = 'Por favor, insira um tópico para gerar o pitch.';
+                return;
+            }
+
+            setButtonState(true);
+            outputDiv.innerHTML = '<p class="text-center text-[#4286f4]">A inteligência artificial está a preparar a sua mensagem estratégica...</p>';
+            citationsDiv.innerHTML = '';
+            
+            const systemPrompt = `Você é um Assistente de Vendas Estratégico especializado no mercado de SaaS de RH e Finanças em Portugal. Seu objetivo é ajudar o vendedor da Factorial a criar argumentos de pitch altamente eficazes. O conteúdo gerado deve ser em Português (Portugal), persuasivo e focado em resolver desafios específicos de PMEs portuguesas (como conformidade com IVA, SAF-T, e eficiência de custos).`;
+            
+            const userQuery = `Gere conteúdo de pitch sobre o seguinte tópico: "${topic}". O tom deve ser: "${tone}".`;
+
+            const payload = {
+                model: "gpt-4o-mini",
+                messages: [
+                    { role: "system", content: systemPrompt },
+                    { role: "user", content: userQuery }
+                ],
+                max_tokens: 1000,
+                temperature: 0.7
+            };
+            
+            let resultText = "Ocorreu um erro ao gerar o conteúdo.";
+            let maxRetries = 3;
+            let delay = 1000;
+
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${apiKey}`,
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const choice = result.choices?.[0];
+
+                    if (choice && choice.message?.content) {
+                        resultText = choice.message.content;
+                        break; // Success
+                    }
+                    
+                } catch (error) {
+                    console.error("Erro na tentativa", i + 1, ":", error);
+                    if (i === maxRetries - 1) {
+                        resultText = `Erro ao conectar com a OpenAI. Verifique sua chave de API e tente novamente. Erro: ${error.message}`;
+                    } else {
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2;
+                    }
+                }
+            }
+
+            outputDiv.innerText = resultText;
+            
+            if (resultText !== "Ocorreu um erro ao gerar o conteúdo.") {
+                citationsDiv.innerHTML = '<p class="font-semibold mt-2">Conteúdo gerado pela OpenAI GPT-4o-mini.</p>';
+            }
+
+            setButtonState(false);
+        }
+
+        function processLabels(labels) {
+            const MAX_LENGTH = 16;
+            return labels.map(label => {
+                if (label.length <= MAX_LENGTH) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const newLabels = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > MAX_LENGTH) {
+                        newLabels.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine) {
+                    newLabels.push(currentLine.trim());
+                }
+                return newLabels;
+            });
+        }
+
+        const tooltipTitleCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                },
+                legend: {
+                    labels: {
+                        color: FONT_COLOR,
+                    }
+                }
+            }
+        };
+
+        const pmeCtx = document.getElementById('pmeChart');
+        if (pmeCtx) {
+            new Chart(pmeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['PMEs', 'Grandes Empresas'],
+                    datasets: [{
+                        label: '% de Empresas',
+                        data: [99.9, 0.1],
+                        backgroundColor: CHART_COLORS,
+                        borderColor: '#ffffff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    ...tooltipTitleCallback
+                }
+            });
+        }
+        
+        const ivaCtx = document.getElementById('ivaChart');
+        if(ivaCtx) {
+            new Chart(ivaCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Taxa Reduzida', 'Taxa Intermédia', 'Taxa Normal'],
+                    datasets: [{
+                        label: 'Taxa de IVA (%)',
+                        data: [6, 13, 23],
+                        backgroundColor: CHART_COLORS,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: GRID_COLOR },
+                            ticks: { color: FONT_COLOR }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: FONT_COLOR }
+                        }
+                    },
+                    ...tooltipTitleCallback
+                }
+            });
+        }
+
+        const projectCostCtx = document.getElementById('projectCostChart');
+        if (projectCostCtx) {
+            new Chart(projectCostCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Projeto Alpha (Web)', 'Projeto Beta (Mobile)', 'Projeto Gamma (Consultoria)'],
+                    datasets: [
+                        {
+                            label: 'Custo com Pessoal',
+                            data: [15000, 22000, 35000],
+                            backgroundColor: '#004e92',
+                        },
+                        {
+                            label: 'Despesas Gerais',
+                            data: [2500, 4000, 7500],
+                            backgroundColor: '#4286f4',
+                        },
+                        {
+                            label: 'Custos Software/SaaS',
+                            data: [1000, 1500, 2000],
+                            backgroundColor: '#00c6ff',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { display: false },
+                            ticks: { color: FONT_COLOR }
+                        },
+                        y: {
+                            stacked: true,
+                            grid: { color: GRID_COLOR },
+                            ticks: { 
+                                color: FONT_COLOR,
+                                callback: function(value) {
+                                    return '€' + value / 1000 + 'k';
+                                }
+                            }
+                        }
+                    },
+                    ...tooltipTitleCallback
+                }
+            });
+        }
+        
+        window.onload = () => {
+             // Initial check for button state on load
+             setButtonState(false); 
+        };
+    </script>
+</body>
+</html>

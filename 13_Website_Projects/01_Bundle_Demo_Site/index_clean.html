@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial Finance | Bundle Demo Portal</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #667eea;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .roi-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .bundle-card {
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .bundle-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+        }
+        
+        .bundle-card.featured {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-gray-900">Factorial <span class="text-purple-600">Finance</span></h1>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#bundles" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium">Bundles</a>
+                        <a href="#calculator" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium">ROI Calculator</a>
+                        <a href="#compliance" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium">Compliance</a>
+                        <a href="#integrations" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium">Integrations</a>
+                        <a href="#success" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 text-sm font-medium">Success Stories</a>
+                    </div>
+                </div>
+                
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <button class="btn-primary text-white px-6 py-2 rounded-lg font-medium">
+                        Schedule Demo
+                    </button>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-purple-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-xl z-50">
+            <div class="px-4 py-6">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-xl font-bold text-gray-900">Menu</h2>
+                    <button id="close-mobile-menu" class="text-gray-500 hover:text-gray-700">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <nav class="space-y-4">
+                    <a href="#home" class="block text-gray-700 hover:text-purple-600 py-2">Home</a>
+                    <a href="#bundles" class="block text-gray-700 hover:text-purple-600 py-2">Bundles</a>
+                    <a href="#calculator" class="block text-gray-700 hover:text-purple-600 py-2">ROI Calculator</a>
+                    <a href="#compliance" class="block text-gray-700 hover:text-purple-600 py-2">Compliance</a>
+                    <a href="#integrations" class="block text-gray-700 hover:text-purple-600 py-2">Integrations</a>
+                    <a href="#success" class="block text-gray-700 hover:text-purple-600 py-2">Success Stories</a>
+                    <button class="btn-primary text-white px-6 py-2 rounded-lg font-medium w-full mt-4">
+                        Schedule Demo
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-white">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    Finance <span class="text-yellow-300">Solutions</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
+                    Transform your financial management with Factorial's comprehensive Finance solutions designed for Portuguese businesses
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="document.getElementById('calculator').scrollIntoView()" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all duration-300">
+                        🧮 Calculate Your ROI
+                    </button>
+                    <button onclick="document.getElementById('bundles').scrollIntoView()" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300">
+                        📦 View Bundles
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bundles Section -->
+    <section id="bundles" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Choose Your Finance Bundle</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive financial solutions designed for Portuguese businesses of all sizes
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Bundle 1: Financial Starter -->
+                <div class="bundle-card bg-white rounded-xl p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">1</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Financial Starter</h3>
+                        <p class="text-gray-600 mb-4">Perfect for 10-50 employees</p>
+                        <div class="mb-6">
+                            <div class="text-4xl font-bold text-purple-600 mb-2">€29</div>
+                            <div class="text-sm text-gray-500">per employee/month</div>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Core HR Management
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Expense Management
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Basic Financial Reporting
+                        </li>
+                    </ul>
+                    <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition-colors">
+                        Get Started
+                    </button>
+                </div>
+                
+                <!-- Bundle 2: Finance Controller -->
+                <div class="bundle-card featured bg-white rounded-xl p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">2</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Finance Controller</h3>
+                        <p class="text-gray-600 mb-4">Ideal for 30-150 employees</p>
+                        <div class="mb-6">
+                            <div class="text-4xl font-bold text-purple-600 mb-2">€39</div>
+                            <div class="text-sm text-gray-500">per employee/month</div>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Everything in Financial Starter
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Time Tracking (financial projects)
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Budget Management
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Advanced Analytics
+                        </li>
+                    </ul>
+                    <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition-colors">
+                        Most Popular
+                    </button>
+                </div>
+                
+                <!-- Bundle 3: Finance Command -->
+                <div class="bundle-card bg-white rounded-xl p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">3</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Finance Command</h3>
+                        <p class="text-gray-600 mb-4">Complete solution for 50-200 employees</p>
+                        <div class="mb-6">
+                            <div class="text-4xl font-bold text-purple-600 mb-2">€49</div>
+                            <div class="text-sm text-gray-500">per employee/month</div>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Everything in Finance Controller
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Procurement Management
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Financial Asset Management
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Advanced Financial Workflows
+                        </li>
+                    </ul>
+                    <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition-colors">
+                        Get Started
+                    </button>
+                </div>
+                
+                <!-- Bundle 4: Finance Pro -->
+                <div class="bundle-card bg-white rounded-xl p-8 card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">4</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Finance Pro</h3>
+                        <p class="text-gray-600 mb-4">Enterprise-grade for 100+ employees</p>
+                        <div class="mb-6">
+                            <div class="text-4xl font-bold text-purple-600 mb-2">€69</div>
+                            <div class="text-sm text-gray-500">per employee/month</div>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Everything in Finance Command
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Advanced Financial Controls
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Custom Integrations
+                        </li>
+                        <li class="flex items-center text-sm">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Dedicated Support
+                        </li>
+                    </ul>
+                    <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition-colors">
+                        Enterprise
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator Section -->
+    <section id="calculator" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">ROI Calculator</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Calculate your potential savings with Factorial Finance solutions
+                </p>
+            </div>
+            
+            <div class="roi-card rounded-2xl p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-white">Your Company Details</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-white">Number of Employees</label>
+                                <input type="number" id="employees" class="w-full p-4 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70" placeholder="Enter number of employees">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-white">Industry</label>
+                                <select id="industry" class="w-full p-4 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white">
+                                    <option value="technology">Technology</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="services">Services</option>
+                                    <option value="retail">Retail</option>
+                                    <option value="healthcare">Healthcare</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-white">Current Financial Software Cost (€)</label>
+                                <input type="number" id="expenses" class="w-full p-4 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70" placeholder="Enter monthly software cost">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-white">Monthly Financial Transactions</label>
+                                <input type="number" id="transactions" class="w-full p-4 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70" placeholder="Enter number of transactions">
+                            </div>
+                            <button onclick="calculateROI()" class="w-full bg-white text-purple-600 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors">
+                                Calculate ROI
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-white">Your Potential Savings</h3>
+                        <div id="roi-results" class="space-y-4">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                <div class="text-sm opacity-80 text-white">Monthly Time Saved</div>
+                                <div id="time-saved" class="text-2xl font-bold text-white">0 hours</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                <div class="text-sm opacity-80 text-white">Monthly Cost Savings</div>
+                                <div id="cost-savings" class="text-2xl font-bold text-white">€0</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                <div class="text-sm opacity-80 text-white">Error Reduction</div>
+                                <div id="error-reduction" class="text-2xl font-bold text-white">€0</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                <div class="text-sm opacity-80 text-white">Annual ROI</div>
+                                <div id="annual-roi" class="text-2xl font-bold text-white">0%</div>
+                            </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                                <div class="text-sm opacity-80 text-white">Recommended Bundle</div>
+                                <div id="recommended-bundle" class="text-xl font-bold text-white">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chart Container -->
+                <div class="mt-8">
+                    <div class="bg-white rounded-lg p-6">
+                        <canvas id="roiChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compliance Section -->
+    <section id="compliance" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Compliance & Security</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Built for Portuguese financial regulations and security standards
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🛡️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">GDPR Compliant</h3>
+                    <p class="text-gray-600">Full compliance with Portuguese data protection laws</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🔒</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Bank-Level Security</h3>
+                    <p class="text-gray-600">256-bit encryption and secure data transmission</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">📋</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Audit Trail</h3>
+                    <p class="text-gray-600">Complete financial transaction tracking and reporting</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">⚖️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Portuguese Tax</h3>
+                    <p class="text-gray-600">Automatic compliance with Portuguese tax regulations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integrations Section -->
+    <section id="integrations" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Financial Integrations</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Connect with Portuguese financial ecosystem and popular business tools
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🏦</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Portuguese Banks</h3>
+                    <p class="text-gray-600">Millennium, BPI, Santander, Caixa Geral</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">💳</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Payment Systems</h3>
+                    <p class="text-gray-600">MB Way, Multibanco, PayPal integration</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">📊</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Accounting Software</h3>
+                    <p class="text-gray-600">Sage, Primavera, QuickBooks integration</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">📄</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">E-Invoicing</h3>
+                    <p class="text-gray-600">Portuguese e-invoicing system integration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section id="success" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Success Stories</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Real results from Portuguese companies using Factorial Finance
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🏭</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-900">Construction Company</h3>
+                        <p class="text-gray-600 mb-4">150 employees</p>
+                        <div class="text-3xl font-bold text-green-600 mb-2">€45,000</div>
+                        <p class="text-sm text-gray-500">Annual savings in project cost control</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">💻</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-900">Tech Startup</h3>
+                        <p class="text-gray-600 mb-4">75 employees</p>
+                        <div class="text-3xl font-bold text-green-600 mb-2">€28,000</div>
+                        <p class="text-sm text-gray-500">Annual savings in expense automation</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🏥</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-900">Healthcare Group</h3>
+                        <p class="text-gray-600 mb-4">200 employees</p>
+                        <div class="text-3xl font-bold text-green-600 mb-2">€62,000</div>
+                        <p class="text-sm text-gray-500">Annual savings in financial compliance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Ready to Transform Your Financial Management?</h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Get a personalized demo and see how Factorial Finance can help your business
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="btn-primary text-white px-8 py-4 rounded-lg font-bold text-lg">
+                    📞 Schedule Demo
+                </button>
+                <button class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-purple-600 hover:text-white transition-all duration-300">
+                    💬 Contact Sales
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Factorial Finance</h3>
+                <p class="text-gray-400 mb-4">Strategic financial management for Portuguese businesses</p>
+                <p class="text-sm text-gray-500">© 2024 Factorial. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu
+                    mobileMenu.classList.remove('open');
+                }
+            });
+        });
+
+        // ROI Calculator
+        function calculateROI() {
+            const employees = parseInt(document.getElementById('employees').value) || 0;
+            const industry = document.getElementById('industry').value;
+            const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+            const transactions = parseInt(document.getElementById('transactions').value) || 0;
+            
+            if (employees === 0) {
+                alert('Please enter the number of employees');
+                return;
+            }
+            
+            // Calculate based on industry and company size
+            const industryMultipliers = {
+                'technology': 1.2,
+                'manufacturing': 1.0,
+                'services': 0.8,
+                'retail': 0.9,
+                'healthcare': 1.1
+            };
+            
+            const multiplier = industryMultipliers[industry] || 1.0;
+            
+            // Calculate time saved (hours per month) - Finance specific
+            const timeSaved = Math.round(employees * 3.2 * multiplier);
+            
+            // Calculate cost savings (€ per month) - Finance specific
+            const hourlyRate = 28; // Higher rate for financial work in Portugal
+            const costSavings = Math.round(timeSaved * hourlyRate);
+            
+            // Calculate error reduction savings
+            const errorReduction = Math.round(transactions * 2.5 * employees);
+            
+            // Calculate annual ROI
+            const monthlyCost = employees * 39; // Average bundle cost
+            const annualROI = Math.round(((costSavings * 12) - (monthlyCost * 12)) / (monthlyCost * 12) * 100);
+            
+            // Recommend bundle
+            let recommendedBundle = 'Financial Starter';
+            if (employees >= 100) {
+                recommendedBundle = 'Finance Pro';
+            } else if (employees >= 50) {
+                recommendedBundle = 'Finance Command';
+            } else if (employees >= 30) {
+                recommendedBundle = 'Finance Controller';
+            }
+            
+            // Update results
+            document.getElementById('time-saved').textContent = timeSaved + ' hours';
+            document.getElementById('cost-savings').textContent = '€' + costSavings.toLocaleString();
+            document.getElementById('error-reduction').textContent = '€' + errorReduction.toLocaleString();
+            document.getElementById('annual-roi').textContent = annualROI + '%';
+            document.getElementById('recommended-bundle').textContent = recommendedBundle;
+            
+            // Update chart
+            updateROIChart(employees, costSavings, monthlyCost);
+        }
+        
+        function updateROIChart(employees, monthlySavings, monthlyCost) {
+            const ctx = document.getElementById('roiChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (window.roiChartInstance) {
+                window.roiChartInstance.destroy();
+            }
+            
+            window.roiChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Current Cost', 'Factorial Cost', 'Monthly Savings', 'Annual Savings'],
+                    datasets: [{
+                        label: 'Cost Comparison (€)',
+                        data: [monthlyCost * 12, monthlyCost * 12, monthlySavings * 12, monthlySavings * 12],
+                        backgroundColor: [
+                            'rgba(102, 126, 234, 0.8)',
+                            'rgba(118, 75, 162, 0.8)',
+                            'rgba(34, 197, 94, 0.8)',
+                            'rgba(245, 158, 11, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(102, 126, 234, 1)',
+                            'rgba(118, 75, 162, 1)',
+                            'rgba(34, 197, 94, 1)',
+                            'rgba(245, 158, 11, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'ROI Analysis - 12 Month Projection'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '€' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
