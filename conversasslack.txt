@@ -1,0 +1,728 @@
+Federico d'Orsi
+Feedback tracker
+Hoje à(s) 11h41
+Thanks @Raúl :foguete:
+:pepelightsable:
+1
+
+
+
+Federico d'Orsi
+Feedback tracker
+Hoje à(s) 11h31
+Hi Raul, sure!
+Screenshot 2025-10-14 at 15.59.08.png
+Screenshot 2025-10-14 at 15.59.08.png
+Compartilhado por Federico d'Orsi em Hoje
+
+
+Federico d'Orsi
+ 
+pre-sales-partnership-italia
+9 out à(s) 8h16
+Ciao carissimi! :abanando: @aqui
+Ieri abbiamo fatto un punto sull’AI in Factorial, e come sapete, molte funzionalità sono già integrate nei moduli di Talent.
+Per chi non fosse riuscito a partecipare, trovate qui la presentazione con:
+Cosa abbiamo già disponibile
+Cosa sta arrivando
+I modelli di AI utilizzati
+Ecco un breve recap delle funzionalità AI attive
+:quebra_cabeça: Recruitment
+ • AI Job Description
+ • AI Top Match
+ • AI Candidate Summary
+ • AI Import CV from PDF
+ • (In feature flag) AI Candidate Search → “dev_ats_ai_search”
+:gráfico_de_barras: Performance
+ • AI Insights dopo le Performance Review (sia Team che Individuali)
+:balão_de_fala: Engagement
+ AI Topic Report nelle Pulse Survey
+ AI 1:1 Summary
+ Ask AI (chatbot)
+AI Coach for Managers
+:mãos_para_cima:
+1
+
+Federico d'Orsi
+ Conversa em 
+all-products-squad
+9 out à(s) 6h08
+@Alessia Falbo @Giacomo Torresi @Davide Pinna @Laura fatemi sapere come va e cosa ne pensate del contenuto :músculo:
+Federico d'Orsi
+ Conversa em 
+recruitment-multiportal
+8 out à(s) 6h55
+ok thanks @Emmanuel :sorriso_pequeno: (editado) 
+Federico d'Orsi
+ 
+all-products-squad
+8 out à(s) 4h16
+Buongiorno Bellissimi...L' altra attività è il Focus di Industrie @aqui ...Dopo il training di inizio settembre abbiamo un po’ rallentato il ritmo sul progetto su Industry Insights (Industrial & Manufacturing, Consumer Goods,... Mostrar mais
+:rocket-intensifies:
+5
+
+
+
+
+
+4 respostas
+Última resposta há 6 diasVer conversa
+Federico d'Orsi
+ 
+recruitment-multiportal
+7 out à(s) 12h02
+Hi team,...Question on portals - once the client posts the job on the portal (ex. indeed), if they want to take it and adv autonomously, will it still be linked to our ATS so will candidates can land to our ATS?...cc @Michele Coloricchio
+
+
+2 respostas
+Última resposta há 7 diasVer conversa
+Federico d'Orsi
+ 
+all-products-squad
+7 out à(s) 11h13
+Ciao carissimi! @aqui...Dopo un periodo di stallo siamo tornati, più forti di prima, ho due updates per voi, ecco il primo:...FAC-BUSTERS ...Con OLG abbiamo finalizzato la prima lista:... Mostrar mais (editado) 
+:foguete:
+3
+
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+1º out à(s) 7h59
+cc. @Marco Tudino
+Federico d'Orsi
+ 
+enablement-and-pre-sales
+30 set à(s) 11h17
+Hi @Paula Núñez can you invite us at this meeting ?
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 30 set
+
+
+Federico d'Orsi
+ 
+flat-hunt
+23 set à(s) 5h47
+Hei Everyone, a friend of mine is renting a room in her apartment....:pino_redondo:Location: Gracia, via carrer escorial...:cama: Double bed...:casa: 2 bedroom apartment (only girls)...:data: Available: immediately... :dinheiro_com_asas: €600/month (bill excluded)...:telefone: +34 623 00 94... Mostrar mais
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 23 set
+
+
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 23 set
+
+
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 23 set
+
+
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 23 set
+
+
+Federico d'Orsi
+ Conversa em 
+team-talent-trainings
+17 set à(s) 10h19
+Ciao @Elena Tringali & @amitalia, do we have someone in Italy?
+Federico d'Orsi
+ 
+pre-sales-and-product-marketing
+17 set à(s) 9h18
+Hi team, do we have an updated pitch deck for Performance?...I have this one in the sales repository but is from Feb 2025...I found this one in figma with a different layout, but doesn't seem completed @Dani (editado) 
+:olhos:
+1
+
+
+
+2 respostas
+Última resposta há 27 diasVer conversa
+Federico d'Orsi
+ Conversa em 
+team-talent-performance
+16 set à(s) 8h53
+Hi Emiliano, thanks a lot for the clarification :mãos_para_cima:...Now it’s clear:... Mostrar mais (editado) 
+Federico d'Orsi
+ Conversa em 
+team-talent-performance
+15 set à(s) 10h44
+cc @Alessia Muni @Giulia Bassi
+Federico d'Orsi
+ Conversa em 
+team-talent-performance
+15 set à(s) 10h44
+Test de verdad performance review name: TEST PROECO (copia)...Prospect BO: 500MRR - 81 seats...Issue observed: The final performance score shown in Factorial (6.19/10) does not match the weighted calculation done externally in... Mostrar mais
+
+Estratto valutazione Proeco (1).xlsx
+Compartilhado por Federico d'Orsi em 15 set
+
+
+Federico d'Orsi
+ 
+team-talent-performance
+15 set à(s) 10h42
+Hi Team,...While we were creating a performance review with wighted scoring in the demo environment for a potencial client of @Pietro Rousseau , we noticed the the final score was wrong, we double checked the same calculation in a excel file... Mostrar mais
+:olhos:
+1
+
+
+
+4 respostas
+Última resposta há 28 diasVer conversa
+Federico d'Orsi
+ Conversa em 
+italian-market
+12 set à(s) 9h46
+Fortissimi :foguete:
+Federico d'Orsi
+ Conversa em 
+enablement-and-pre-sales
+12 set à(s) 7h39
+@Pauline Moutaux we are actually trying using our training module within Factorial to set up classes and the the satisfaction survey.
+:joinha:
+1
+
+Federico d'Orsi
+ Conversa em 
+enablement-and-pre-sales
+12 set à(s) 5h45
+Thanks @Paula Núñez, great idea! How we can link the answers to the specific training?
+
+Federico d'Orsi
+ Conversa em 
+changelog
+12 set à(s) 4h39
+@talent-pre-sales
+:coração:
+1
+
+Federico d'Orsi
+ 
+all-products-squad
+11 set à(s) 4h58
+Grazie @Laura :mãos_de_coração:
+:doge_hug:
+1
+
+Federico d'Orsi
+ 
+all-products-squad
+11 set à(s) 3h55
+Che dream team!
+Federico d'Orsi
+ 
+pre-sales-new-deal-talent
+10 set à(s) 7h14
+Wow France is going crazy with Talent today  :france-heart:
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+9 set à(s) 9h29
+Thanks @Ruben, Now it's working :foguete:
+Federico d'Orsi
+ 
+team-growth-product
+8 set à(s) 12h48
+Hi team, In new demos (created today), there is not data on Talent Pool, can you have a look :sorriso_pequeno:...Name: Pino Srl...User: hellen@demo98744add.com...Pass: Papapapa333!
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 8 set
+
+
+
+
+2 respostas
+Última resposta há 1 mêsVer conversa
+Federico d'Orsi
+ Conversa em 
+changelog
+4 set à(s) 8h47
+@talent-pre-sales
+:thanks:
+3
+
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+2 set à(s) 6h28
+Hi @Amalia González! Did you get the access to that demo? :sorriso_pequeno:
+Federico d'Orsi
+ 
+enablement-and-pre-sales
+1º set à(s) 12h
+Hi team :foguete:...I started using Modjo and I was wondering if we can have a meeting on how to master it :sorriso_pequeno:
+
+
+2 respostas
+Última resposta há 1 mêsVer conversa
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+1º set à(s) 9h25
+@Ainhoa Soret cc
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+1º set à(s) 9h15
+week 35
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+1º set à(s) 9h14
+Link...email: hellen@demofeedbc7c.com...Pass: Papapapa333!
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+1º set à(s) 9h08
+Hi @Amalia González, I see it in the backoffice as :marca_de_verificação_branca: but cannot see it in the demo
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+1º set à(s) 6h46
+Thanks!!!
+Federico d'Orsi
+ 
+talent-pm-and-presales
+1º set à(s) 6h31
+Welcome back @Andres Sucre :foguete:
+:thanks:
+1
+
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+1º set à(s) 6h30
+Gracias @MiguelPousa y @Ray García!! do you know when we will have it in demo @Amalia González?
+Federico d'Orsi
+ 
+enablement-and-pre-sales
+11 ago à(s) 5h58
+Hi team! How are you?...Do we know when we will get access to Modjo? Can't wait to get some analytics on calls and meeting :foguete:
+:olhos:
+1
+
+Federico d'Orsi
+ 
+beta-testing-1o1
+11 ago à(s) 5h56
+Hei @Luri, here's mine :italian: :it: :foguete:
+:thanks:
+1
+
+Federico d'Orsi
+ Conversa em 
+ae-italia
+30 jul à(s) 4h09
+Questa in inglese se ti serve
+
+
+
+Federico d'Orsi
+ Conversa em 
+ae-italia
+30 jul à(s) 4h08
+We @Pietro Rousseau, avoglia! abbiamo una presentazione nel sales repository
+
+Federico d'Orsi
+ Conversa em 
+team-growth-product
+29 jul à(s) 9h43
+Thanks @Ruben!!
+Federico d'Orsi
+ 
+team-growth-product
+29 jul à(s) 9h33
+Hi team, I cannot access any demo neither new ones. It keeps showing this
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 29 jul
+
+
+
+
+2 respostas
+Última resposta há 3 mesesVer conversa
+Federico d'Orsi
+ 
+team-growth-product
+28 jul à(s) 5h46
+Hi team,...I'm not able to see any data in Trainings in a new faster demo IT. Same thing happened to older faster demos.
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 28 jul
+
+
+
+1 resposta
+há 3 mesesVer conversa
+Federico d'Orsi
+ Conversa em 
+ultimate-pricing-packaging-2025
+22 jul à(s) 8h23
+Hi @Federico Trabucchi, I had a similar issue, I used this ticket to report it
+Federico d'Orsi
+ 
+team-talent-recruitment
+18 jul à(s) 8h35
+Hi team!...A prospect contacted by @Fabio Palazzo asked if possible to connect more than one job portal profile to our ATS, and then when publishing selecting the specific profile in the job portal....The use case is a company with different... Mostrar mais
+
+1 resposta
+há 3 mesesVer conversa
+Federico d'Orsi
+ 
+ae-italia
+17 jul à(s) 11h08
+
+
+
+Chloé Dumit
+:foguete: Say hello to the faster and improved Demos! - now available to everyone! :confete_e_serpentina:
+We’ve heard your feedback loud and clear, demos are one of your most important tools, and we knew they had to be better. So we’re excited to announce that faster generation of Demos is here, and it brings all the improvements you’ve been waiting for:
+:marca_de_verificação_branca: No need to recreate for every feature launch — your demo will now update automatically every week.
+Mostrar mais
+Screen Recording 2025-07-17 at 10.55.51 AM.mov
+ 
+
+Gerar transcrição
+Postado em release-faster-demo-type (arquivado) | 17 jul | Ver mensagem
+:coração:
+1
+:mãos_para_cima:
+1
+:rocket-intensifies:
+1
+:fire_on_fire:
+1
+
+Federico d'Orsi
+ Conversa em 
+pricing-complaints-channel-jun25
+16 jul à(s) 6h12
+Just submitted @Moamen, thanks :sorriso_pequeno:
+:mãos_para_cima:
+1
+
+Federico d'Orsi
+ 
+pricing-complaints-channel-jun25
+16 jul à(s) 6h02
+Hi team!...Yesterday I opened a dealhub sent by @Federico Trabucchi (italian AE) and I saw there is still the trust channel ("canale dei reclami") in the bundles. Can you please have a look? @Moamen :rezando:
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 16 jul
+
+
+:rosto_derretendo:
+1
+
+
+
+
+3 respostas
+Última resposta há 3 mesesVer conversa
+Federico d'Orsi
+ Conversa em 
+release-faster-demo-type
+16 jul à(s) 4h19
+me too please @Ruben
+:check:
+1
+
+Federico d'Orsi
+ Conversa em 
+dream-demo-dream-team
+15 jul à(s) 9h40
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 15 jul
+
+
+Federico d'Orsi
+ 
+dream-demo-dream-team
+15 jul à(s) 9h18
+Hi team,...Demos are not loading, neither creating a new one
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 15 jul
+
+
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 15 jul
+
+
+
+
+2 respostas
+Última resposta há 3 mesesVer conversa
+Federico d'Orsi
+ Conversa em 
+gtm-engagement
+15 jul à(s) 7h19
+let's gooo
+Federico d'Orsi
+ Conversa em 
+pre-sales-new-deal-talent
+15 jul à(s) 7h16
+Not in HB
+Federico d'Orsi
+ Conversa em 
+pre-sales-and-product-marketing
+14 jul à(s) 12h27
+:italy-heart: Ita is done! @Dani I added a comment regarding the data sources in the slide 9
+:gesto_ok::tom-de-pele-3:
+1
+:joinha:
+1
+
+Federico d'Orsi
+ 
+pre-sales-and-product-marketing
+11 jul à(s) 9h52
+Hei @Dani, do we have any material for Performance Enterprise to localize?
+Federico d'Orsi
+ Conversa em 
+changelog
+11 jul à(s) 9h18
+So cool! Great job team :foguete:
+:coração:
+1
+
+Federico d'Orsi
+ 
+flat-hunt
+10 jul à(s) 6h39
+Hei Everyone, a friend of mine is renting a room in her apartment....:pino_redondo:Location: Gracia, via carrer escorial...:cama: Double bed...:casa: 2 bedroom apartment (only girls)...:data: Available: immediately... :dinheiro_com_asas: €600/month bill excluded...:telefone: +34 623 00 94... Mostrar mais
+WhatsApp Image 2025-07-10 at 11.29.34.jpeg
+WhatsApp Image 2025-07-10 at 11.29.34.jpeg
+Compartilhado por Federico d'Orsi em 10 jul
+
+
+WhatsApp Image 2025-07-10 at 11.29.35 (1).jpeg
+WhatsApp Image 2025-07-10 at 11.29.35 (1).jpeg
+Compartilhado por Federico d'Orsi em 10 jul
+
+
+WhatsApp Image 2025-07-10 at 11.29.35 (2).jpeg
+WhatsApp Image 2025-07-10 at 11.29.35 (2).jpeg
+Compartilhado por Federico d'Orsi em 10 jul
+
+
+WhatsApp Image 2025-07-10 at 11.29.35.jpeg
+WhatsApp Image 2025-07-10 at 11.29.35.jpeg
+Compartilhado por Federico d'Orsi em 10 jul
+
+
+
+1 resposta
+há 3 mesesVer conversa
+Federico d'Orsi
+ Conversa em 
+dream-demo-dream-team
+8 jul à(s) 13h27
+but happened the same in the previous ones
+Federico d'Orsi
+ Conversa em 
+dream-demo-dream-team
+8 jul à(s) 13h26
+Correct! It is a new demo, generated today
+Federico d'Orsi
+ 
+dream-demo-dream-team
+8 jul à(s) 13h17
+Hi team! In Training-insights, there is no data when you open the tab. I always need to filter in larger timeframe to see something. Would be great have them populated, It will help the demo experience for client. Many... Mostrar mais
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 8 jul
+
+
+
+
+3 respostas
+Última resposta há 3 mesesVer conversa
+
+
+
+
+Federico d'Orsi
+ 
+ae-italia
+8 jul à(s) 11h07
+Ciao Carissimi, @Borja Gómez il manager di Pre-sales Operation ha creato questo canale slack in cui si possono fare domande su prodotti di Operation e l'AI ti risponde andandosi a prendere le informazioni dai vari Notion e altre... Mostrar mais
+
+
+
+Francisco de Borja Gomez Muñoz
+:abanando: Hey team! If you have any question about Operations (Compensation, Benefits, Time, Organization), we've set-up a new :robô_cabeça: at canal privado.
+Just type "@Realm <QUESTION>" and it'll get you the answer quickly.
+Feedback accepted.
+Conversa em sales | 8 jul | Ver mensagem
+:mãos_para_cima:
+2
+:coração_roxo:
+2
+
+Federico d'Orsi
+ Conversa em 
+talent-pm-and-presales
+7 jul à(s) 16h36
+No worries @Marina Tudela!
+Federico d'Orsi
+ 
+team-talent-recruitment
+27 jun à(s) 7h11
+Hi team,...Can we export the talent pool in a CSV file?...Many thanks :sorriso_pequeno:
+
+
+2 respostas
+Última resposta há 4 mesesVer conversa
+Federico d'Orsi
+ Conversa em 
+team-talent-performance
+27 jun à(s) 6h32
+Gracias @Felipe Cardona :foguete:
+Federico d'Orsi
+ Conversa em 
+team-talent-recruitment
+27 jun à(s) 6h16
+CC @Federico Trabucchi
+Federico d'Orsi
+ 
+team-talent-recruitment
+27 jun à(s) 6h15
+Hi team :sorriso_pequeno:...In the search bar of our Talent pool, can I look for a keyword written in the CV of the candidate?
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 27 jun
+
+
+:loading:
+1
+
+
+
+
+
+5 respostas
+Última resposta há 3 mesesVer conversa
+Federico d'Orsi
+ 
+team-talent-performance
+27 jun à(s) 4h38
+Good morning and happy Friday team :sorriso_pequeno:...I've been assigned a perf review and I tried using my mobile to answer....I could see the notification in the inbox but cannot click on the review. Also, when I went in Performance I... Mostrar mais
+
+
+2 respostas
+Última resposta há 4 mesesVer conversa
+Federico d'Orsi
+ Conversa em 
+pre-sales-and-product-marketing
+26 jun à(s) 6h14
+super graciasss
+Federico d'Orsi
+ 
+pre-sales-and-product-marketing
+26 jun à(s) 6h10
+Hola @Dani, I see in the repository the new slides on Bundles for IT with a formatting problem. If you want I can edit them but I'd need edit access :sorriso_pequeno:
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 26 jun
+
+
+:done:
+1
+
+
+
+2 respostas
+Última resposta há 4 mesesVer conversa
+Federico d'Orsi
+ Conversa em 
+product-marketing
+20 jun à(s) 4h08
+Thanks @Luri
+Federico d'Orsi
+ Conversa em 
+product-marketing
+18 jun à(s) 6h54
+I can also do it, if I have access :sorriso_pequeno:
+:joinha::tom-de-pele-4:
+1
+
+Federico d'Orsi
+ Conversa em 
+product-marketing
+18 jun à(s) 6h52
+Thanks @Carmen Madrazo @Dani...In the Italian ones, I see that in exporting we lost some formatting in slide 2 and there is the slide 7 to be eliminated :sorriso_pequeno:
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 18 jun
+
+
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 18 jun
+
+
+Federico d'Orsi
+ Conversa em 
+talent-domain
+13 jun à(s) 8h48
+Great to hear this! And kudos to our amazing team :foguete: :factorial: (editado) 
+Federico d'Orsi
+ Conversa em 
+sales
+12 jun à(s) 11h58
+Fortissimi @Nicolo' Salvati e @Marco Beltramini :foguete: :italy-heart:
+:rocket-intensifies:
+1
+
+Federico d'Orsi
+ Conversa em 
+sales
+12 jun à(s) 7h36
+@Alessia Falbo @Giacomo Torresi :italy-heart: :foguete:
+:mãos_para_cima:
+1
+
+Federico d'Orsi
+ 
+pre-sales-new-deal-talent
+6 jun à(s) 7h
+Portugal day today :portugal-heart:
+Federico d'Orsi
+ Conversa em 
+pre-sales-and-product-marketing
+6 jun à(s) 4h44
+@Dani IT bundle and dealhub covers are updated
+:coração:
+1
+
+Federico d'Orsi
+ 
+ae-italia
+5 jun à(s) 9h34
+Ciao a tutti!...CANALE RECLAMI CHE LASCIA I BUNDLE :abanando::tom-de-pele-2:... Mostrar mais
+:joinha:
+1
+
+Federico d'Orsi
+ Conversa em 
+pre-sales-and-product-marketing
+5 jun à(s) 7h17
+@Dani en este de custom bundle, no lo vamos a quitar verdad?
+image.png
+image.png
+Compartilhado por Federico d'Orsi em 5 jun
+
+
+Federico d'Orsi
+ Conversa em 
+pre-sales-and-product-marketing
+5 jun à(s) 6h50
+Habemus acceso a Figma! Me pongo a cambiar las cosas ahora mismo
