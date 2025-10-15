@@ -693,10 +693,6 @@
                                 <div class="text-sm opacity-80 text-white">ROI Anual</div>
                                 <div id="annual-roi" class="text-2xl font-bold text-white">0%</div>
                             </div>
-                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
-                                <div class="text-sm opacity-80 text-white">Bundle Recomendado</div>
-                                <div id="recommended-bundle" class="text-xl font-bold text-white">-</div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1518,23 +1514,12 @@
             // ROI anual (%)
             const annualROI = Math.round(((totalSavings * 12) - (monthlyCost * 12)) / (monthlyCost * 12) * 100);
 
-            // Bundle recomendado pelo tamanho da equipa
-            let recommendedBundle = 'Compliance Básico';
-            if (totalEmployees >= 100) {
-                recommendedBundle = 'Enterprise Compliance';
-            } else if (totalEmployees >= 50) {
-                recommendedBundle = 'Gestão de Projetos';
-            } else if (totalEmployees >= 30) {
-                recommendedBundle = 'Contabilidade Analítica';
-            }
-            
             // Atualiza UI
             document.getElementById('time-saved').textContent = timeSaved + ' horas';
             document.getElementById('operational-savings').textContent = '€' + operationalSavings.toLocaleString();
             document.getElementById('error-reduction').textContent = '€' + errorReduction.toLocaleString();
             document.getElementById('total-savings').textContent = '€' + totalSavings.toLocaleString();
             document.getElementById('annual-roi').textContent = annualROI + '%';
-            document.getElementById('recommended-bundle').textContent = recommendedBundle;
             
             // Atualiza gráfico
             updateROIChart(totalEmployees, totalSavings, monthlyCost);

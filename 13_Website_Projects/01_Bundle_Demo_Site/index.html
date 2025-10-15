@@ -378,34 +378,32 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div class="text-center text-white z-10 px-6">
-            <div class="radical-red-box-title">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                    <span>🛡️ Proteção</span>
-                    <br>
-                    <span class="gradient-text">Contra Tributação Autónoma</span>
-                    <br>
-                    <span class="neon-text">50-70% de Risco</span>
-                </h1>
+    <section id="home" class="min-h-screen flex items-center relative overflow-hidden" style="background: linear-gradient(135deg, #ffffff 0%, #ffe8ee 100%);">
+        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <!-- Left: Text -->
+            <div class="z-10">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-gray-900">Plataforma de Mitigação de Riscos Fiscais e Laborais</h1>
+                <p class="text-lg md:text-2xl text-gray-700 mb-6">Elimine 100% do risco de Tributação Autónoma e otimize a gestão financeira em minutos.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="document.getElementById('calculator').scrollIntoView()" class="px-8 py-4 rounded-lg font-bold text-white text-lg" style="background:#E63946;">
+                        🧮 Calcular Economia Agora
+                    </button>
+                    <button onclick="document.getElementById('success').scrollIntoView()" class="px-8 py-4 rounded-lg font-bold text-gray-900 text-lg border border-gray-300 bg-white hover:bg-gray-50">
+                        ▶️ Ver Demonstração da Plataforma
+                    </button>
             </div>
-            <div class="radical-red-box-title">
-                <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto text-white leading-relaxed">
-                    Despesas não documentadas podem sofrer Tributação Autónoma de 50% a 70%.
-                    A Factorial centraliza e valida todos os comprovativos, eliminando o risco de autuações da ACT e preservando benefícios TSU/IRS.                </p>
             </div>
-            <div class="mb-8">
-                <div class="inline-block bg-gradient-to-r from-red-500 to-orange-500 text-white px-6 py-3 rounded-full font-bold text-lg">
-                    🔒 Controle e rastreabilidade total das despesas
+            <!-- Right: Mockup placeholder -->
+            <div class="relative hidden lg:block">
+                <div class="bg-white rounded-2xl shadow-2xl p-4 border border-gray-200">
+                    <div class="w-[560px] h-[340px] bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500">
+                        <div class="text-center">
+                            <div class="text-5xl mb-3">📊</div>
+                            <div class="font-semibold">Mockup do Dashboard / ROI</div>
+                            <div class="text-sm text-gray-500">(substituir por imagem real da plataforma)</div>
                 </div>
             </div>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="document.getElementById('compliance').scrollIntoView()" class="bg-white text-red-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
-                    🛡️ Ver Proteção Fiscal
-                </button>
-                <button onclick="document.getElementById('calculator').scrollIntoView()" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
-                    🧮 Calcular Poupanças
-                </button>
+                </div>
             </div>
         </div>
 
@@ -641,9 +639,9 @@
                                 <p class="text-xs text-white/80 mt-1">Core é por colaborador ativo (obrigatório para todos). Preço: €1.7/seat.</p>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium mb-2 text-white">Usuários de Despesas (pagos além do fixed fee)</label>
+                                <label class="block text-sm font-medium mb-2 text-white">Usuários de Despesas (total)</label>
                                 <input type="number" id="expensesUsers" class="w-full p-4 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70" placeholder="Ex.: 20" value="0">
-                                <p class="text-xs text-white/80 mt-1">Ao ativar Despesas, paga-se o fixed fee (€76.7) + apenas os utilizadores do módulo (tiers com desconto).</p>
+                                <p class="text-xs text-white/80 mt-1">Europa: fixed fee inclui os 5 primeiros seats; tiers aplicam-se aos adicionais.</p>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-2 text-white">Seats em Projetos (Project Management)</label>
@@ -695,10 +693,6 @@
                                 <div class="text-sm opacity-80 text-white">ROI Anual</div>
                                 <div id="annual-roi" class="text-2xl font-bold text-white">0%</div>
                             </div>
-                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
-                                <div class="text-sm opacity-80 text-white">Bundle Recomendado</div>
-                                <div id="recommended-bundle" class="text-xl font-bold text-white">-</div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -708,6 +702,20 @@
                     <div class="bg-white rounded-lg p-6">
                         <canvas id="roiChart" width="400" height="200"></canvas>
                     </div>
+                </div>
+                
+                <!-- Micro-conversion form -->
+                <div class="mt-8 bg-white rounded-lg p-6 border border-gray-200">
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Receba o resultado detalhado da sua simulação</h4>
+                    <p class="text-gray-600 mb-4">Preencha para receber por email o relatório completo de ROI e recomendações.</p>
+                    <form class="grid md:grid-cols-3 gap-4">
+                        <input type="text" placeholder="Nome" class="p-3 rounded-lg border border-gray-300" />
+                        <input type="email" placeholder="Email" class="p-3 rounded-lg border border-gray-300" />
+                        <input type="text" placeholder="Empresa" class="p-3 rounded-lg border border-gray-300" />
+                        <div class="md:col-span-3">
+                            <button type="button" class="px-6 py-3 rounded-lg font-bold text-white" style="background:#E63946;">Enviar Relatório</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="mt-8 bg-white bg-opacity-20 rounded-lg p-6">
                     <h4 class="text-xl font-bold text-white mb-2">Como calculamos o ROI</h4>
@@ -1137,6 +1145,46 @@
         </div>
     </section>
 
+    <!-- Social Proof Section -->
+    <section id="social-proof" class="py-20" style="background:#ffffff;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-10">
+                <h3 class="text-3xl font-semibold text-gray-900 mb-2">Empresas que confiam na Factorial</h3>
+                <p class="text-gray-600">Conformidade total com a Autoridade Tributária | GDPR | SAFT-PT</p>
+            </div>
+
+            <!-- Logos Row -->
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-6 items-center mb-10">
+                <div class="h-12 bg-gray-100 rounded flex items-center justify-center text-gray-500">Logo 1</div>
+                <div class="h-12 bg-gray-100 rounded flex items-center justify-center text-gray-500">Logo 2</div>
+                <div class="h-12 bg-gray-100 rounded flex items-center justify-center text-gray-500">Logo 3</div>
+                <div class="h-12 bg-gray-100 rounded flex items-center justify-center text-gray-500">Logo 4</div>
+                <div class="h-12 bg-gray-100 rounded flex items-center justify-center text-gray-500">Logo 5</div>
+                <div class="h-12 bg-gray-100 rounded flex items-center justify-center text-gray-500">Logo 6</div>
+            </div>
+
+            <!-- Testimonials Carousel (simple auto-slide placeholder) -->
+            <div class="overflow-x-auto whitespace-nowrap space-x-4 py-4">
+                <div class="inline-block align-top bg-white border border-gray-200 rounded-xl p-6 shadow-sm w-80">
+                    <p class="text-gray-800 mb-3">“Reduzimos em 60% as despesas não documentadas com a Factorial.”</p>
+                    <p class="text-sm text-gray-500">— João Martins, CFO, Grupo Saúde+</p>
+                </div>
+                <div class="inline-block align-top bg-white border border-gray-200 rounded-xl p-6 shadow-sm w-80">
+                    <p class="text-gray-800 mb-3">“Fechamento 2x mais rápido e auditoria facilitada.”</p>
+                    <p class="text-sm text-gray-500">— Ana Ribeiro, Finance Controller</p>
+                </div>
+                <div class="inline-block align-top bg-white border border-gray-200 rounded-xl p-6 shadow-sm w-80">
+                    <p class="text-gray-800 mb-3">“Automação de políticas reduziu drasticamente erros e retrabalho.”</p>
+                    <p class="text-sm text-gray-500">— Pedro Sousa, Diretor Financeiro</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-10">
+                <button onclick="document.getElementById('contact').scrollIntoView()" class="px-8 py-4 rounded-lg font-bold text-white" style="background:#E63946;">Agendar demonstração gratuita</button>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gradient-to-br from-red-50 to-orange-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -1373,11 +1421,11 @@
             // Core seats
             const coreCost = coreSeats * prices.coreSeat[priceLevel];
 
-            // Expenses: fixed + extra users por faixas
+            // Expenses: fixed fee inclui 5 primeiros seats; tiers cobram apenas adicionais
             let expensesCost = 0;
             if (expensesUsers > 0) {
                 expensesCost += prices.expensesFixed[priceLevel];
-                let remaining = expensesUsers;
+                let remaining = Math.max(0, expensesUsers - 5); // 5 incluídos no fixed fee (Europa)
                 // tier 1: 1–20
                 const t1 = Math.min(remaining, 20);
                 expensesCost += t1 * prices.expensesExtraTier1[priceLevel];
@@ -1466,23 +1514,12 @@
             // ROI anual (%)
             const annualROI = Math.round(((totalSavings * 12) - (monthlyCost * 12)) / (monthlyCost * 12) * 100);
 
-            // Bundle recomendado pelo tamanho da equipa
-            let recommendedBundle = 'Compliance Básico';
-            if (totalEmployees >= 100) {
-                recommendedBundle = 'Enterprise Compliance';
-            } else if (totalEmployees >= 50) {
-                recommendedBundle = 'Gestão de Projetos';
-            } else if (totalEmployees >= 30) {
-                recommendedBundle = 'Contabilidade Analítica';
-            }
-            
             // Atualiza UI
             document.getElementById('time-saved').textContent = timeSaved + ' horas';
             document.getElementById('operational-savings').textContent = '€' + operationalSavings.toLocaleString();
             document.getElementById('error-reduction').textContent = '€' + errorReduction.toLocaleString();
             document.getElementById('total-savings').textContent = '€' + totalSavings.toLocaleString();
             document.getElementById('annual-roi').textContent = annualROI + '%';
-            document.getElementById('recommended-bundle').textContent = recommendedBundle;
             
             // Atualiza gráfico
             updateROIChart(totalEmployees, totalSavings, monthlyCost);
