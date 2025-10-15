@@ -639,9 +639,9 @@
                                 <p class="text-xs text-white/80 mt-1">Core é por colaborador ativo (obrigatório para todos). Preço: €1.7/seat.</p>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium mb-2 text-white">Usuários de Despesas (pagos além do fixed fee)</label>
+                                <label class="block text-sm font-medium mb-2 text-white">Usuários de Despesas (total)</label>
                                 <input type="number" id="expensesUsers" class="w-full p-4 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70" placeholder="Ex.: 20" value="0">
-                                <p class="text-xs text-white/80 mt-1">Ao ativar Despesas, paga-se o fixed fee (€76.7) + apenas os utilizadores do módulo (tiers com desconto).</p>
+                                <p class="text-xs text-white/80 mt-1">Europa: fixed fee inclui os 5 primeiros seats; tiers aplicam-se aos adicionais.</p>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-2 text-white">Seats em Projetos (Project Management)</label>
@@ -1425,11 +1425,11 @@
             // Core seats
             const coreCost = coreSeats * prices.coreSeat[priceLevel];
 
-            // Expenses: fixed + extra users por faixas
+            // Expenses: fixed fee inclui 5 primeiros seats; tiers cobram apenas adicionais
             let expensesCost = 0;
             if (expensesUsers > 0) {
                 expensesCost += prices.expensesFixed[priceLevel];
-                let remaining = expensesUsers;
+                let remaining = Math.max(0, expensesUsers - 5); // 5 incluídos no fixed fee (Europa)
                 // tier 1: 1–20
                 const t1 = Math.min(remaining, 20);
                 expensesCost += t1 * prices.expensesExtraTier1[priceLevel];
