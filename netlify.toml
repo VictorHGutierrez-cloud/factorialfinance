@@ -1,5 +1,5 @@
 [build]
-  publish = "."
+  publish = "13_Website_Projects/01_Bundle_Demo_Site"
 
 [[redirects]]
   from = "/api/*"
