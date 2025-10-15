@@ -195,6 +195,29 @@
             background: linear-gradient(135deg, #f8fafc 0%, #ffe0e6 100%);
         }
         
+        /* Acessibilidade do dropdown no card ROI */
+        .roi-card select {
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            color: #ffffff !important;
+        }
+        .roi-card select option {
+            background-color: #C41F3A !important; /* um pouco mais escuro que o radical */
+            color: #ffffff !important;
+        }
+
+        /* Forçar texto escuro nos inputs do micro-form dentro do ROI card */
+        .roi-card .bg-white input,
+        .roi-card .bg-white select,
+        .roi-card .bg-white textarea {
+            color: #111827 !important; /* text-gray-900 */
+            background-color: #ffffff !important;
+        }
+        .roi-card .bg-white input::placeholder,
+        .roi-card .bg-white textarea::placeholder {
+            color: #6b7280 !important; /* text-gray-500 */
+            opacity: 1;
+        }
+
         /* Dark Mode Toggle */
         .dark-mode-toggle {
             position: fixed;
@@ -693,14 +716,14 @@
                                 <div class="text-sm opacity-80 text-white">ROI Anual</div>
                                 <div id="annual-roi" class="text-2xl font-bold text-white">0%</div>
                             </div>
-                        <div class="bg-white bg-opacity-20 rounded-lg p-4">
+                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
                             <div class="flex items-center justify-between mb-2">
                                 <div class="text-sm opacity-80 text-white">Custo estimado Factorial (mês)</div>
                                 <button id="toggle-breakdown" class="text-xs text-white/70 hover:text-white underline" onclick="toggleCostBreakdown()">Ver detalhes</button>
                             </div>
                             <div id="monthly-cost-total" class="text-2xl font-bold text-white">€0</div>
                             <div class="mt-2 text-xs text-white/90 hidden" id="cost-breakdown"></div>
-                        </div>
+                            </div>
                         </div>
                     </div>
                 </div>
