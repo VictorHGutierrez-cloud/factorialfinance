@@ -235,9 +235,8 @@
         const GRID_COLOR = '#e0e0e0';
         const CHART_COLORS = ['#004e92', '#4286f4', '#00c6ff', '#64b5f6'];
         
-        // Configuração da OpenAI - SUBSTITUA pela sua chave de API
-        const apiKey = "SUA_CHAVE_OPENAI_AQUI";
-        const apiUrl = "https://api.openai.com/v1/chat/completions";
+        // Configuração da OpenAI - Usando Netlify Functions
+        const apiUrl = "/api/openai-proxy";
 
         // Utility to handle button state and loading spinner
         const btn = document.getElementById('generatePitchBtn');
@@ -301,10 +300,14 @@
                     const response = await fetch(apiUrl, {
                         method: 'POST',
                         headers: { 
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${apiKey}`
+                            'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify({
+                            messages: payload.messages,
+                            model: payload.model,
+                            max_tokens: payload.max_tokens,
+                            temperature: payload.temperature
+                        })
                     });
 
                     if (!response.ok) {
