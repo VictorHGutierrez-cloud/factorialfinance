@@ -693,6 +693,11 @@
                                 <div class="text-sm opacity-80 text-white">ROI Anual</div>
                                 <div id="annual-roi" class="text-2xl font-bold text-white">0%</div>
                             </div>
+                            <div class="bg-white bg-opacity-20 rounded-lg p-4">
+							<div class="text-sm opacity-80 text-white">Custo estimado Factorial (mês)</div>
+							<div id="monthly-cost-total" class="text-2xl font-bold text-white">€0</div>
+							<div class="mt-2 text-xs text-white/90" id="cost-breakdown"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -719,7 +724,13 @@
                 </div>
                 <div class="mt-8 bg-white bg-opacity-20 rounded-lg p-6">
                     <h4 class="text-xl font-bold text-white mb-2">Como calculamos o ROI</h4>
-                    <p class="text-white text-sm opacity-90">Consideramos quatro alavancas: eficiência operacional (tempo poupado), redução de erros e fraudes (compliance e automação), agilidade financeira (fechamento e controlo de budget) e custo de oportunidade (tempo redirecionado para análise). Assumimos 60% de automação do tempo manual e 30% de redução de erros, ajustados pela complexidade do setor.</p>
+                    <ul class="text-white text-sm opacity-90 list-disc pl-5 space-y-1">
+                        <li><strong>Eficiência operacional</strong>: Tempo poupado = (transações × tempo médio × 0.6 × multiplicador setor) / 60</li>
+                        <li><strong>Economia operacional (€)</strong>: Tempo poupado × custo médio/hora</li>
+                        <li><strong>Redução de erros (€)</strong>: transações × valor médio por erro × (0.3 × multiplicador setor)</li>
+                        <li><strong>Custo Factorial (mês)</strong>: Core (todos os colaboradores) + Despesas (fixed fee inclui 5 seats + tiers adicionais) + Procurement (fixo, opcional) + Projetos (por seat) + Faturamento (fixo, opcional)</li>
+                        <li><strong>ROI anual</strong>: ((poupança total × 12) − (custo mensal × 12)) / (custo mensal × 12) × 100</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1461,6 +1472,78 @@
             return coreCost + expensesCost + procurementCost + projectCost + invoicingCost;
         }
 
+        // Breakdown detalhado do custo mensal
+        function computeMonthlyCostBreakdown() {
+            const priceLevel = document.getElementById('priceLevel').value;
+            const coreSeats = parseInt(document.getElementById('companyEmployees').value) || 0;
+            const expensesUsers = parseInt(document.getElementById('expensesUsers').value) || 0;
+            const projectSeats = parseInt(document.getElementById('projectSeats').value) || 0;
+            const procurementEnabled = document.getElementById('procurementEnabled').checked;
+            const salesInvoicingEnabled = document.getElementById('salesInvoicingEnabled').checked;
+
+            const prices = {
+                coreSeat: { min: 1.7, mid: 1.7, max: 1.7 },
+                expensesFixed: { min: 76.7, mid: 76.7, max: 76.7 },
+                expensesExtraTier1: { min: 4.0, mid: 5.0, max: 6.0 },
+                expensesExtraTier2: { min: 3.2, mid: 4.0, max: 4.8 },
+                expensesExtraTier3: { min: 2.8, mid: 3.5, max: 4.2 },
+                expensesExtraTier4: { min: 2.0, mid: 2.5, max: 3.0 },
+                procurementFixed: { min: 221.1, mid: 221.1, max: 221.1 },
+                projectSeat: { min: 2.8, mid: 3.5, max: 4.3 },
+                salesInvoicingFixed: { min: 30.0, mid: 30.0, max: 30.0 }
+            };
+
+            const coreCost = coreSeats * prices.coreSeat[priceLevel];
+
+            // Expenses breakdown
+            let expensesFixed = 0;
+            let tier1 = 0, tier2 = 0, tier3 = 0, tier4 = 0;
+            if (expensesUsers > 0) {
+                expensesFixed = prices.expensesFixed[priceLevel];
+                let remaining = Math.max(0, expensesUsers - 5);
+                tier1 = Math.min(remaining, 20) * prices.expensesExtraTier1[priceLevel];
+                remaining -= Math.min(remaining, 20);
+                if (remaining > 0) {
+                    const count2 = Math.min(remaining, 30);
+                    tier2 = count2 * prices.expensesExtraTier2[priceLevel];
+                    remaining -= count2;
+                }
+                if (remaining > 0) {
+                    const count3 = Math.min(remaining, 50);
+                    tier3 = count3 * prices.expensesExtraTier3[priceLevel];
+                    remaining -= count3;
+                }
+                if (remaining > 0) {
+                    tier4 = remaining * prices.expensesExtraTier4[priceLevel];
+                }
+            }
+
+            const procurementCost = procurementEnabled ? prices.procurementFixed[priceLevel] : 0;
+            const projectCost = projectSeats * prices.projectSeat[priceLevel];
+            const invoicingCost = salesInvoicingEnabled ? prices.salesInvoicingFixed[priceLevel] : 0;
+
+            const total = coreCost + expensesFixed + tier1 + tier2 + tier3 + tier4 + procurementCost + projectCost + invoicingCost;
+
+            return {
+                total: Math.round(total),
+                items: {
+                    core: Math.round(coreCost),
+                    despesas: {
+                        fixed: Math.round(expensesFixed),
+                        incluidos: Math.min(expensesUsers, 5),
+                        adicionais: Math.max(0, expensesUsers - 5),
+                        tier1: Math.round(tier1),
+                        tier2: Math.round(tier2),
+                        tier3: Math.round(tier3),
+                        tier4: Math.round(tier4)
+                    },
+                    procurement: Math.round(procurementCost),
+                    projetos: Math.round(projectCost),
+                    faturamento: Math.round(invoicingCost)
+                }
+            };
+        }
+
         // ROI Calculator (Modelo Revisado)
         function calculateROI() {
             const submitters = parseInt(document.getElementById('submitters').value) || 0;
@@ -1510,6 +1593,7 @@
 
             // Custo mensal Factorial (€) — híbrido conforme sua tabela
             const monthlyCost = Math.round(computeMonthlyCostHybrid());
+            const breakdown = computeMonthlyCostBreakdown();
 
             // ROI anual (%)
             const annualROI = Math.round(((totalSavings * 12) - (monthlyCost * 12)) / (monthlyCost * 12) * 100);
@@ -1520,6 +1604,17 @@
             document.getElementById('error-reduction').textContent = '€' + errorReduction.toLocaleString();
             document.getElementById('total-savings').textContent = '€' + totalSavings.toLocaleString();
             document.getElementById('annual-roi').textContent = annualROI + '%';
+            document.getElementById('monthly-cost-total').textContent = '€' + breakdown.total.toLocaleString();
+            const b = breakdown.items;
+            const breakdownHtml = `
+                <div>Core (${(document.getElementById('companyEmployees').value||0)} seats): <strong>€${b.core.toLocaleString()}</strong></div>
+                <div>Despesas: fixed fee (inclui ${b.despesas.incluidos} seats) <strong>€${b.despesas.fixed.toLocaleString()}</strong></div>
+                ${b.despesas.adicionais>0?`<div class="ml-2">Adicionais (${b.despesas.adicionais}): T1 €${b.despesas.tier1.toLocaleString()} T2 €${b.despesas.tier2.toLocaleString()} T3 €${b.despesas.tier3.toLocaleString()} T4 €${b.despesas.tier4.toLocaleString()}</div>`:''}
+                ${b.projetos>0?`<div>Projetos (${(document.getElementById('projectSeats').value||0)} seats): <strong>€${b.projetos.toLocaleString()}</strong></div>`:''}
+                ${b.procurement>0?`<div>Procurement (fixo): <strong>€${b.procurement.toLocaleString()}</strong></div>`:''}
+                ${b.faturamento>0?`<div>Faturamento (fixo): <strong>€${b.faturamento.toLocaleString()}</strong></div>`:''}
+            `;
+            document.getElementById('cost-breakdown').innerHTML = breakdownHtml;
             
             // Atualiza gráfico
             updateROIChart(totalEmployees, totalSavings, monthlyCost);
