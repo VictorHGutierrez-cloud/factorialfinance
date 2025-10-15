@@ -664,7 +664,7 @@
                             <div>
                                 <label class="block text-sm font-medium mb-2 text-white">Usuários de Despesas (total)</label>
                                 <input type="number" id="expensesUsers" class="w-full p-4 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70" placeholder="Ex.: 20" value="0">
-                                <p class="text-xs text-white/80 mt-1">Europa: fixed fee inclui os 5 primeiros seats; tiers aplicam-se aos adicionais.</p>
+                                <p class="text-xs text-white/80 mt-1">O módulo de Despesas tem um custo fixo obrigatório (fixed fee) e tiers aplicados apenas aos usuários adicionais:<br>Business: €43.3 fixed | Enterprise: €76.7 fixed</p>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium mb-2 text-white">Seats em Projetos (Project Management)</label>
@@ -680,7 +680,7 @@
                                 </label>
                                 <div>
                                     <label class="block text-sm font-medium mb-2 text-white">Plano</label>
-                                    <select id="priceLevel" class="w-full p-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white">
+                                    <select id="priceLevel" class="w-full p-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white" onchange="handlePlanChange()">
                                         <option value="business" selected>Business</option>
                                         <option value="enterprise">Enterprise</option>
                                     </select>
@@ -732,6 +732,34 @@
                     <div class="bg-white rounded-lg p-6">
                         <canvas id="roiChart" width="400" height="200"></canvas>
                     </div>
+                </div>
+                
+                <!-- ROI Comparativo -->
+                <div class="mt-8 border-t border-white/30 pt-6">
+                    <h3 class="text-xl font-semibold text-white mb-4">Comparativo de Custos</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm text-white/80 mb-1">
+                                <span>Custo Manual Estimado</span>
+                                <span id="manual-cost-percent">0%</span>
+                            </div>
+                            <div class="h-3 bg-white/20 rounded">
+                                <div id="manual-cost-bar" class="h-3 bg-red-500 rounded" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm text-white/80 mb-1">
+                                <span>Custo Factorial</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="h-3 bg-white/20 rounded">
+                                <div class="h-3 bg-green-500 rounded" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-white/90">
+                        Economia estimada: <strong id="savings-display">€0</strong> (<span id="roi-percent-display">0%</span> ROI)
+                    </p>
                 </div>
                 
                 <!-- Micro-conversion form -->
@@ -1432,68 +1460,25 @@
             }
         });
 
-        // Pricing function (Business/Enterprise conforme tabela fornecida)
-        function computeMonthlyCostHybrid() {
-            const priceLevel = document.getElementById('priceLevel').value; // 'business' | 'enterprise'
-            const coreSeats = parseInt(document.getElementById('companyEmployees').value) || 0; // Core obrigatório para todos
-            const expensesUsers = parseInt(document.getElementById('expensesUsers').value) || 0;
-            const projectSeats = parseInt(document.getElementById('projectSeats').value) || 0;
-            const procurementEnabled = document.getElementById('procurementEnabled').checked;
-            const salesInvoicingEnabled = document.getElementById('salesInvoicingEnabled').checked;
-
-            // Tabela de preços por plano
-            const prices = {
-                coreSeat: 1.7,
-                business: {
-                    expensesFixed: 43.3,
-                    expensesTier1: 4.0, // 1–20
-                    expensesTier2: 3.2, // 21–50
-                    expensesTier3: 2.8, // 51–100
-                    expensesTier4: 2.0, // +100
-                    projectSeat: 2.8,
-                    procurementFixed: 221.1,
-                    salesInvoicingFixed: 30.0
-                },
-                enterprise: {
-                    expensesFixed: 76.7,
-                    expensesTier1: 6.0,
-                    expensesTier2: 4.8,
-                    expensesTier3: 4.2,
-                    expensesTier4: 3.0,
-                    projectSeat: 4.3
-                }
-            };
-
-            // Core seats
-            const coreCost = coreSeats * prices.coreSeat;
-
-            // Expenses: conforme plano; NÃO inclui 5 seats no fixed fee
-            let expensesCost = 0;
-            if (expensesUsers > 0) {
-                const pp = prices[priceLevel];
-                let varCost = 0;
-                if (expensesUsers <= 20) varCost = expensesUsers * pp.expensesTier1;
-                else if (expensesUsers <= 50) varCost = (20 * pp.expensesTier1) + (expensesUsers - 20) * pp.expensesTier2;
-                else if (expensesUsers <= 100) varCost = (20 * pp.expensesTier1) + (30 * pp.expensesTier2) + (expensesUsers - 50) * pp.expensesTier3;
-                else varCost = (20 * pp.expensesTier1) + (30 * pp.expensesTier2) + (50 * pp.expensesTier3) + (expensesUsers - 100) * pp.expensesTier4;
-                expensesCost = pp.expensesFixed + varCost;
+        // Handle plan change - disable Procurement/Invoicing for Enterprise
+        function handlePlanChange() {
+            const plan = document.getElementById('priceLevel').value;
+            const procurementCheckbox = document.getElementById('procurementEnabled');
+            const invoicingCheckbox = document.getElementById('salesInvoicingEnabled');
+            
+            if (plan === 'enterprise') {
+                procurementCheckbox.checked = false;
+                invoicingCheckbox.checked = false;
+                procurementCheckbox.disabled = true;
+                invoicingCheckbox.disabled = true;
+            } else {
+                procurementCheckbox.disabled = false;
+                invoicingCheckbox.disabled = false;
             }
-
-            // Procurement: apenas Business
-            const procurementCost = (priceLevel === 'business' && procurementEnabled) ? prices.business.procurementFixed : 0;
-
-            // Project seats conforme plano
-            const projectCost = projectSeats * (priceLevel === 'business' ? prices.business.projectSeat : prices.enterprise.projectSeat);
-
-            // Sales Invoicing: apenas Business
-            const invoicingCost = (priceLevel === 'business' && salesInvoicingEnabled) ? prices.business.salesInvoicingFixed : 0;
-
-            // Total mensal
-            return coreCost + expensesCost + procurementCost + projectCost + invoicingCost;
         }
 
-        // Breakdown detalhado do custo mensal (Business/Enterprise)
-        function computeMonthlyCostBreakdown() {
+        // Pricing function (Business/Enterprise com cálculo escalonado correto)
+        function computeMonthlyCostHybrid() {
             const priceLevel = document.getElementById('priceLevel').value; // 'business' | 'enterprise'
             const coreSeats = parseInt(document.getElementById('companyEmployees').value) || 0;
             const expensesUsers = parseInt(document.getElementById('expensesUsers').value) || 0;
@@ -1501,47 +1486,103 @@
             const procurementEnabled = document.getElementById('procurementEnabled').checked;
             const salesInvoicingEnabled = document.getElementById('salesInvoicingEnabled').checked;
 
-            const prices = {
-                coreSeat: 1.7,
-                business: {
-                    expensesFixed: 43.3,
-                    expensesTier1: 4.0,
-                    expensesTier2: 3.2,
-                    expensesTier3: 2.8,
-                    expensesTier4: 2.0,
-                    projectSeat: 2.8,
-                    procurementFixed: 221.1,
-                    salesInvoicingFixed: 30.0
-                },
-                enterprise: {
-                    expensesFixed: 76.7,
-                    expensesTier1: 6.0,
-                    expensesTier2: 4.8,
-                    expensesTier3: 4.2,
-                    expensesTier4: 3.0,
-                    projectSeat: 4.3
+            // Core cost (obrigatório em ambos os planos)
+            const coreCost = coreSeats * 1.7;
+
+            // Expenses: cálculo escalonado correto
+            let expensesCost = 0;
+            if (expensesUsers > 0) {
+                const fixedFee = priceLevel === 'business' ? 43.3 : 76.7;
+                
+                const tiers = priceLevel === 'business' 
+                    ? [
+                        { limit: 20, price: 4.0 },
+                        { limit: 50, price: 3.2 },
+                        { limit: 100, price: 2.8 },
+                        { limit: Infinity, price: 2.0 }
+                    ]
+                    : [
+                        { limit: 20, price: 6.0 },
+                        { limit: 50, price: 4.8 },
+                        { limit: 100, price: 4.2 },
+                        { limit: Infinity, price: 3.0 }
+                    ];
+
+                let remaining = expensesUsers;
+                let prevLimit = 0;
+                let varCost = 0;
+
+                for (const { limit, price } of tiers) {
+                    if (remaining <= 0) break;
+                    const tierUsers = Math.min(remaining, limit - prevLimit);
+                    varCost += tierUsers * price;
+                    remaining -= tierUsers;
+                    prevLimit = limit;
                 }
-            };
 
-            const coreCost = coreSeats * prices.coreSeat;
+                expensesCost = fixedFee + varCost;
+            }
 
-            // Expenses breakdown
+            // Project seats conforme plano
+            const projectCost = projectSeats * (priceLevel === 'business' ? 2.8 : 4.3);
+
+            // Procurement e Invoicing: apenas Business
+            const procurementCost = (priceLevel === 'business' && procurementEnabled) ? 221.1 : 0;
+            const invoicingCost = (priceLevel === 'business' && salesInvoicingEnabled) ? 30.0 : 0;
+
+            // Total mensal
+            return coreCost + expensesCost + projectCost + procurementCost + invoicingCost;
+        }
+
+        // Breakdown detalhado do custo mensal (Business/Enterprise)
+        function computeMonthlyCostBreakdown() {
+            const priceLevel = document.getElementById('priceLevel').value;
+            const coreSeats = parseInt(document.getElementById('companyEmployees').value) || 0;
+            const expensesUsers = parseInt(document.getElementById('expensesUsers').value) || 0;
+            const projectSeats = parseInt(document.getElementById('projectSeats').value) || 0;
+            const procurementEnabled = document.getElementById('procurementEnabled').checked;
+            const salesInvoicingEnabled = document.getElementById('salesInvoicingEnabled').checked;
+
+            const coreCost = coreSeats * 1.7;
+
+            // Expenses breakdown com cálculo escalonado
             let expensesFixed = 0;
             let tier1 = 0, tier2 = 0, tier3 = 0, tier4 = 0;
             if (expensesUsers > 0) {
-                const pp = prices[priceLevel];
-                expensesFixed = pp.expensesFixed;
+                expensesFixed = priceLevel === 'business' ? 43.3 : 76.7;
+                
+                const tiers = priceLevel === 'business' 
+                    ? [
+                        { limit: 20, price: 4.0 },
+                        { limit: 50, price: 3.2 },
+                        { limit: 100, price: 2.8 },
+                        { limit: Infinity, price: 2.0 }
+                    ]
+                    : [
+                        { limit: 20, price: 6.0 },
+                        { limit: 50, price: 4.8 },
+                        { limit: 100, price: 4.2 },
+                        { limit: Infinity, price: 3.0 }
+                    ];
+
                 let remaining = expensesUsers;
-                const c1 = Math.min(remaining, 20);
-                tier1 = c1 * pp.expensesTier1; remaining -= c1;
-                if (remaining > 0) { const c2 = Math.min(remaining, 30); tier2 = c2 * pp.expensesTier2; remaining -= c2; }
-                if (remaining > 0) { const c3 = Math.min(remaining, 50); tier3 = c3 * pp.expensesTier3; remaining -= c3; }
-                if (remaining > 0) { tier4 = remaining * pp.expensesTier4; }
+                let prevLimit = 0;
+
+                for (const { limit, price } of tiers) {
+                    if (remaining <= 0) break;
+                    const tierUsers = Math.min(remaining, limit - prevLimit);
+                    if (prevLimit === 0) tier1 = tierUsers * price;
+                    else if (prevLimit === 20) tier2 = tierUsers * price;
+                    else if (prevLimit === 50) tier3 = tierUsers * price;
+                    else if (prevLimit === 100) tier4 = tierUsers * price;
+                    remaining -= tierUsers;
+                    prevLimit = limit;
+                }
             }
 
-            const procurementCost = (priceLevel === 'business' && procurementEnabled) ? prices.business.procurementFixed : 0;
-            const projectCost = projectSeats * (priceLevel === 'business' ? prices.business.projectSeat : prices.enterprise.projectSeat);
-            const invoicingCost = (priceLevel === 'business' && salesInvoicingEnabled) ? prices.business.salesInvoicingFixed : 0;
+            const procurementCost = (priceLevel === 'business' && procurementEnabled) ? 221.1 : 0;
+            const projectCost = projectSeats * (priceLevel === 'business' ? 2.8 : 4.3);
+            const invoicingCost = (priceLevel === 'business' && salesInvoicingEnabled) ? 30.0 : 0;
 
             const total = coreCost + expensesFixed + tier1 + tier2 + tier3 + tier4 + procurementCost + projectCost + invoicingCost;
 
@@ -1655,6 +1696,22 @@
             
             // Atualiza gráfico
             updateROIChart(totalEmployees, totalSavings, monthlyCost);
+            
+            // Atualiza bloco comparativo
+            const manualCost = totalSavings + monthlyCost; // Custo manual estimado
+            const manualPercent = Math.min((manualCost / monthlyCost) * 100, 1000); // Limita a 1000% para visualização
+            document.getElementById('manual-cost-percent').textContent = Math.round(manualPercent) + '%';
+            document.getElementById('manual-cost-bar').style.width = Math.min(manualPercent, 100) + '%';
+            document.getElementById('savings-display').textContent = '€' + totalSavings.toLocaleString();
+            document.getElementById('roi-percent-display').textContent = annualROI + '%';
+            
+            // Scroll para o resultado
+            setTimeout(() => {
+                document.getElementById('roi-results').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 100);
         }
         
         function updateROIChart(totalEmployees, monthlySavings, monthlyCost) {
