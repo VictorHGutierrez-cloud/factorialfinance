@@ -679,11 +679,10 @@
                                     <input type="checkbox" id="salesInvoicingEnabled" class="mr-2"> Faturamento de Vendas
                                 </label>
                                 <div>
-                                    <label class="block text-sm font-medium mb-2 text-white">Nível de preço</label>
+                                    <label class="block text-sm font-medium mb-2 text-white">Plano</label>
                                     <select id="priceLevel" class="w-full p-3 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white">
-                                        <option value="min">Mínimo</option>
-                                        <option value="mid" selected>Intermédio</option>
-                                        <option value="max">Máximo</option>
+                                        <option value="business" selected>Business</option>
+                                        <option value="enterprise">Enterprise</option>
                                     </select>
                                 </div>
                             </div>
@@ -754,7 +753,7 @@
                         <li><strong>Eficiência operacional</strong>: Tempo poupado = (transações × tempo médio × 0.6 × multiplicador setor) / 60</li>
                         <li><strong>Economia operacional (€)</strong>: Tempo poupado × custo médio/hora</li>
                         <li><strong>Redução de erros (€)</strong>: transações × valor médio por erro × (0.3 × multiplicador setor)</li>
-                        <li><strong>Custo Factorial (mês)</strong>: Core (todos os colaboradores) + Despesas (fixed fee inclui 5 seats + tiers adicionais) + Procurement (fixo, opcional) + Projetos (por seat) + Faturamento (fixo, opcional)</li>
+                        <li><strong>Custo Factorial (mês)</strong>: Core (todos) + Despesas (Business/Enterprise: fixed fee + tiers por utilizador) + Procurement/Faturamento (apenas Business, fixo) + Projetos (por seat, preço varia por plano)</li>
                         <li><strong>ROI anual</strong>: ((poupança total × 12) − (custo mensal × 12)) / (custo mensal × 12) × 100</li>
                     </ul>
                 </div>
@@ -1433,74 +1432,69 @@
             }
         });
 
-        // Pricing function (modelo híbrido)
+        // Pricing function (Business/Enterprise conforme tabela fornecida)
         function computeMonthlyCostHybrid() {
-            const priceLevel = document.getElementById('priceLevel').value; // 'min' | 'mid' | 'max'
+            const priceLevel = document.getElementById('priceLevel').value; // 'business' | 'enterprise'
             const coreSeats = parseInt(document.getElementById('companyEmployees').value) || 0; // Core obrigatório para todos
             const expensesUsers = parseInt(document.getElementById('expensesUsers').value) || 0;
             const projectSeats = parseInt(document.getElementById('projectSeats').value) || 0;
             const procurementEnabled = document.getElementById('procurementEnabled').checked;
             const salesInvoicingEnabled = document.getElementById('salesInvoicingEnabled').checked;
 
-            // Tabela de preços por nível
+            // Tabela de preços por plano
             const prices = {
-                coreSeat: { min: 1.7, mid: 1.7, max: 1.7 },
-                expensesFixed: { min: 76.7, mid: 76.7, max: 76.7 },
-                expensesExtraTier1: { min: 4.0, mid: 5.0, max: 6.0 },     // 1–20
-                expensesExtraTier2: { min: 3.2, mid: 4.0, max: 4.8 },     // 21–50 (20% desconto)
-                expensesExtraTier3: { min: 2.8, mid: 3.5, max: 4.2 },     // 51–100 (30% desconto)
-                expensesExtraTier4: { min: 2.0, mid: 2.5, max: 3.0 },     // +100 (50% desconto)
-                procurementFixed: { min: 221.1, mid: 221.1, max: 221.1 },
-                projectSeat: { min: 2.8, mid: 3.5, max: 4.3 },
-                salesInvoicingFixed: { min: 30.0, mid: 30.0, max: 30.0 }
+                coreSeat: 1.7,
+                business: {
+                    expensesFixed: 43.3,
+                    expensesTier1: 4.0, // 1–20
+                    expensesTier2: 3.2, // 21–50
+                    expensesTier3: 2.8, // 51–100
+                    expensesTier4: 2.0, // +100
+                    projectSeat: 2.8,
+                    procurementFixed: 221.1,
+                    salesInvoicingFixed: 30.0
+                },
+                enterprise: {
+                    expensesFixed: 76.7,
+                    expensesTier1: 6.0,
+                    expensesTier2: 4.8,
+                    expensesTier3: 4.2,
+                    expensesTier4: 3.0,
+                    projectSeat: 4.3
+                }
             };
 
             // Core seats
-            const coreCost = coreSeats * prices.coreSeat[priceLevel];
+            const coreCost = coreSeats * prices.coreSeat;
 
-            // Expenses: fixed fee inclui 5 primeiros seats; tiers cobram apenas adicionais
+            // Expenses: conforme plano; NÃO inclui 5 seats no fixed fee
             let expensesCost = 0;
             if (expensesUsers > 0) {
-                expensesCost += prices.expensesFixed[priceLevel];
-                let remaining = Math.max(0, expensesUsers - 5); // 5 incluídos no fixed fee (Europa)
-                // tier 1: 1–20
-                const t1 = Math.min(remaining, 20);
-                expensesCost += t1 * prices.expensesExtraTier1[priceLevel];
-                remaining -= t1;
-                if (remaining > 0) {
-                    // tier 2: 21–50 (30 users)
-                    const t2 = Math.min(remaining, 30);
-                    expensesCost += t2 * prices.expensesExtraTier2[priceLevel];
-                    remaining -= t2;
-                }
-                if (remaining > 0) {
-                    // tier 3: 51–100 (50 users)
-                    const t3 = Math.min(remaining, 50);
-                    expensesCost += t3 * prices.expensesExtraTier3[priceLevel];
-                    remaining -= t3;
-                }
-                if (remaining > 0) {
-                    // tier 4: +100
-                    expensesCost += remaining * prices.expensesExtraTier4[priceLevel];
-                }
+                const pp = prices[priceLevel];
+                let varCost = 0;
+                if (expensesUsers <= 20) varCost = expensesUsers * pp.expensesTier1;
+                else if (expensesUsers <= 50) varCost = (20 * pp.expensesTier1) + (expensesUsers - 20) * pp.expensesTier2;
+                else if (expensesUsers <= 100) varCost = (20 * pp.expensesTier1) + (30 * pp.expensesTier2) + (expensesUsers - 50) * pp.expensesTier3;
+                else varCost = (20 * pp.expensesTier1) + (30 * pp.expensesTier2) + (50 * pp.expensesTier3) + (expensesUsers - 100) * pp.expensesTier4;
+                expensesCost = pp.expensesFixed + varCost;
             }
 
-            // Procurement fixed
-            const procurementCost = procurementEnabled ? prices.procurementFixed[priceLevel] : 0;
+            // Procurement: apenas Business
+            const procurementCost = (priceLevel === 'business' && procurementEnabled) ? prices.business.procurementFixed : 0;
 
-            // Project seats
-            const projectCost = projectSeats * prices.projectSeat[priceLevel];
+            // Project seats conforme plano
+            const projectCost = projectSeats * (priceLevel === 'business' ? prices.business.projectSeat : prices.enterprise.projectSeat);
 
-            // Sales Invoicing fixed
-            const invoicingCost = salesInvoicingEnabled ? prices.salesInvoicingFixed[priceLevel] : 0;
+            // Sales Invoicing: apenas Business
+            const invoicingCost = (priceLevel === 'business' && salesInvoicingEnabled) ? prices.business.salesInvoicingFixed : 0;
 
             // Total mensal
             return coreCost + expensesCost + procurementCost + projectCost + invoicingCost;
         }
 
-        // Breakdown detalhado do custo mensal
+        // Breakdown detalhado do custo mensal (Business/Enterprise)
         function computeMonthlyCostBreakdown() {
-            const priceLevel = document.getElementById('priceLevel').value;
+            const priceLevel = document.getElementById('priceLevel').value; // 'business' | 'enterprise'
             const coreSeats = parseInt(document.getElementById('companyEmployees').value) || 0;
             const expensesUsers = parseInt(document.getElementById('expensesUsers').value) || 0;
             const projectSeats = parseInt(document.getElementById('projectSeats').value) || 0;
@@ -1508,45 +1502,46 @@
             const salesInvoicingEnabled = document.getElementById('salesInvoicingEnabled').checked;
 
             const prices = {
-                coreSeat: { min: 1.7, mid: 1.7, max: 1.7 },
-                expensesFixed: { min: 76.7, mid: 76.7, max: 76.7 },
-                expensesExtraTier1: { min: 4.0, mid: 5.0, max: 6.0 },
-                expensesExtraTier2: { min: 3.2, mid: 4.0, max: 4.8 },
-                expensesExtraTier3: { min: 2.8, mid: 3.5, max: 4.2 },
-                expensesExtraTier4: { min: 2.0, mid: 2.5, max: 3.0 },
-                procurementFixed: { min: 221.1, mid: 221.1, max: 221.1 },
-                projectSeat: { min: 2.8, mid: 3.5, max: 4.3 },
-                salesInvoicingFixed: { min: 30.0, mid: 30.0, max: 30.0 }
+                coreSeat: 1.7,
+                business: {
+                    expensesFixed: 43.3,
+                    expensesTier1: 4.0,
+                    expensesTier2: 3.2,
+                    expensesTier3: 2.8,
+                    expensesTier4: 2.0,
+                    projectSeat: 2.8,
+                    procurementFixed: 221.1,
+                    salesInvoicingFixed: 30.0
+                },
+                enterprise: {
+                    expensesFixed: 76.7,
+                    expensesTier1: 6.0,
+                    expensesTier2: 4.8,
+                    expensesTier3: 4.2,
+                    expensesTier4: 3.0,
+                    projectSeat: 4.3
+                }
             };
 
-            const coreCost = coreSeats * prices.coreSeat[priceLevel];
+            const coreCost = coreSeats * prices.coreSeat;
 
             // Expenses breakdown
             let expensesFixed = 0;
             let tier1 = 0, tier2 = 0, tier3 = 0, tier4 = 0;
             if (expensesUsers > 0) {
-                expensesFixed = prices.expensesFixed[priceLevel];
-                let remaining = Math.max(0, expensesUsers - 5);
-                tier1 = Math.min(remaining, 20) * prices.expensesExtraTier1[priceLevel];
-                remaining -= Math.min(remaining, 20);
-                if (remaining > 0) {
-                    const count2 = Math.min(remaining, 30);
-                    tier2 = count2 * prices.expensesExtraTier2[priceLevel];
-                    remaining -= count2;
-                }
-                if (remaining > 0) {
-                    const count3 = Math.min(remaining, 50);
-                    tier3 = count3 * prices.expensesExtraTier3[priceLevel];
-                    remaining -= count3;
-                }
-                if (remaining > 0) {
-                    tier4 = remaining * prices.expensesExtraTier4[priceLevel];
-                }
+                const pp = prices[priceLevel];
+                expensesFixed = pp.expensesFixed;
+                let remaining = expensesUsers;
+                const c1 = Math.min(remaining, 20);
+                tier1 = c1 * pp.expensesTier1; remaining -= c1;
+                if (remaining > 0) { const c2 = Math.min(remaining, 30); tier2 = c2 * pp.expensesTier2; remaining -= c2; }
+                if (remaining > 0) { const c3 = Math.min(remaining, 50); tier3 = c3 * pp.expensesTier3; remaining -= c3; }
+                if (remaining > 0) { tier4 = remaining * pp.expensesTier4; }
             }
 
-            const procurementCost = procurementEnabled ? prices.procurementFixed[priceLevel] : 0;
-            const projectCost = projectSeats * prices.projectSeat[priceLevel];
-            const invoicingCost = salesInvoicingEnabled ? prices.salesInvoicingFixed[priceLevel] : 0;
+            const procurementCost = (priceLevel === 'business' && procurementEnabled) ? prices.business.procurementFixed : 0;
+            const projectCost = projectSeats * (priceLevel === 'business' ? prices.business.projectSeat : prices.enterprise.projectSeat);
+            const invoicingCost = (priceLevel === 'business' && salesInvoicingEnabled) ? prices.business.salesInvoicingFixed : 0;
 
             const total = coreCost + expensesFixed + tier1 + tier2 + tier3 + tier4 + procurementCost + projectCost + invoicingCost;
 
@@ -1556,8 +1551,8 @@
                     core: Math.round(coreCost),
                     despesas: {
                         fixed: Math.round(expensesFixed),
-                        incluidos: Math.min(expensesUsers, 5),
-                        adicionais: Math.max(0, expensesUsers - 5),
+                        incluidos: 0,
+                        adicionais: expensesUsers,
                         tier1: Math.round(tier1),
                         tier2: Math.round(tier2),
                         tier3: Math.round(tier3),
@@ -1646,10 +1641,12 @@
             document.getElementById('annual-roi').textContent = annualROI + '%';
             document.getElementById('monthly-cost-total').textContent = '€' + breakdown.total.toLocaleString();
             const b = breakdown.items;
+            const planLabel = (document.getElementById('priceLevel').value === 'enterprise') ? 'Enterprise' : 'Business';
             const breakdownHtml = `
+                <div>Plano: <strong>${planLabel}</strong></div>
                 <div>Core (${(document.getElementById('companyEmployees').value||0)} seats): <strong>€${b.core.toLocaleString()}</strong></div>
-                <div>Despesas: fixed fee (inclui ${b.despesas.incluidos} seats) <strong>€${b.despesas.fixed.toLocaleString()}</strong></div>
-                ${b.despesas.adicionais>0?`<div class="ml-2">Adicionais (${b.despesas.adicionais}): T1 €${b.despesas.tier1.toLocaleString()} T2 €${b.despesas.tier2.toLocaleString()} T3 €${b.despesas.tier3.toLocaleString()} T4 €${b.despesas.tier4.toLocaleString()}</div>`:''}
+                <div>Despesas: fixed fee <strong>€${b.despesas.fixed.toLocaleString()}</strong></div>
+                ${b.despesas.adicionais>0?`<div class="ml-2">Utilizadores (${b.despesas.adicionais}): T1 €${b.despesas.tier1.toLocaleString()} T2 €${b.despesas.tier2.toLocaleString()} T3 €${b.despesas.tier3.toLocaleString()} T4 €${b.despesas.tier4.toLocaleString()}</div>`:''}
                 ${b.projetos>0?`<div>Projetos (${(document.getElementById('projectSeats').value||0)} seats): <strong>€${b.projetos.toLocaleString()}</strong></div>`:''}
                 ${b.procurement>0?`<div>Procurement (fixo): <strong>€${b.procurement.toLocaleString()}</strong></div>`:''}
                 ${b.faturamento>0?`<div>Faturamento (fixo): <strong>€${b.faturamento.toLocaleString()}</strong></div>`:''}
